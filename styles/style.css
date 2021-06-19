@@ -13,7 +13,9 @@
 :root {
     --main-color: #13294E;
     --text-color: white;  
-    --main-red-color: #ff0f00;       
+    --main-red-color: #ff0f00;   
+    --item-highlight-color: #f0f0f0;    
+    --side-menu-width: 250px;    
 }
 
 /*************************************************************************
@@ -110,6 +112,63 @@
     width: auto;
     margin-left: 16px;
 }
+
+/*************************************************************************
+* CSS CLASSES FOR SIDE MENU
+*************************************************************************/
+
+/* sidemenu -- Styles the side menu */
+.sidemenu {
+    height: 100%; /* Menu is full height of window */
+    position: fixed; /* Menu stays in place regardless of other content */
+    z-index: 200; /* Force the menu to be near the front */
+    top: 56px; /* Position menu 64 px from top of screen; accomodates top navbar */
+    left: 0px; /* Position side menu on left-hand side of screen */
+    background-color: var(--main-color); /* Match to main-color */
+    color: var(--text-color);
+    transition-duration: 0.5s; /* Animation transition time for open/close is 0.5 sec */
+    overflow: hidden;
+    list-style-type: none; /* Remove bullets */
+    padding: 0;
+    margin: 0;
+    width: var(--side-menu-width);
+  }
+
+/* sidemenu-open -- Display the side menu as open */
+.sidemenu-open {
+    display: block;
+    width: var(--side-menu-width);
+}
+
+/* sidemenu-closed -- Display the side menu as closed */
+.sidemenu-closed {
+    display: none;
+    width: 0px;
+}
+
+/* sidemenu ul -- Styles the ul element used for the side menu items. */
+.sidemenu ul {
+    list-style-type: none; /* Remove bullets */
+    padding: 0;
+    margin: 0;
+}
+
+/* sidemenu-item -- Styles items in the side menu. */
+.sidemenu-item {
+    padding: 24px 0px 24px 24px; /* top, right, bottom, left */
+    font-size: 18px;
+}
+
+.sidemenu-item:hover {
+    cursor: pointer;
+    background-color: var(--item-highlight-color);
+    color: var(--main-color);
+}  
+
+.sidemenu-icon-pad {
+    padding-right: 1em;
+}
+
 
 /*************************************************************************
 * CSS CLASSES FOR TOP "MODE" TABS
