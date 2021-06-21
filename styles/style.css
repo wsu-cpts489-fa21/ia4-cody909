@@ -19,6 +19,14 @@
 }
 
 /*************************************************************************
+* GLOBAL CSS CLASSES
+* These are global classes that care useful for a variety of elements.
+*************************************************************************/
+.hidden {
+    display: none;
+}
+
+/*************************************************************************
 * CSS CLASSES FOR SKIP LINK (USED BY SCREEN READERS AND KEYBOARD NAV)
 * A skip link allows keyboard users to quickly skip over an app's 
 * navigation elements to reach its content. It is a best practice for
@@ -119,55 +127,33 @@
 
 /* sidemenu -- Styles the side menu */
 .sidemenu {
-    height: 100%; /* Menu is full height of window */
-    position: fixed; /* Menu stays in place regardless of other content */
+    position: fixed; /* Menu stays in place */
+    top: 56px; /* Position menu just below top navbar */
+    padding: 0; /* Remove padding */
+    margin: 0; /* Remove margins */
     z-index: 200; /* Force the menu to be near the front */
-    top: 56px; /* Position menu 64 px from top of screen; accomodates top navbar */
     left: 0px; /* Position side menu on left-hand side of screen */
+    height: 100%; /* Menu is full height of window */
+    width: var(--side-menu-width);
+    overflow: hidden;
     background-color: var(--main-color); /* Match to main-color */
     color: var(--text-color);
-    transition-duration: 0.5s; /* Animation transition time for open/close is 0.5 sec */
-    overflow: hidden;
     list-style-type: none; /* Remove bullets */
-    padding: 0;
-    margin: 0;
-    width: var(--side-menu-width);
+    display: none;
   }
 
-/* sidemenu-open -- Display the side menu as open */
-.sidemenu-open {
-    display: block;
-    width: var(--side-menu-width);
-}
-
-/* sidemenu-closed -- Display the side menu as closed */
-.sidemenu-closed {
-    display: none;
-    width: 0px;
-}
-
-/* sidemenu ul -- Styles the ul element used for the side menu items. */
-.sidemenu ul {
-    list-style-type: none; /* Remove bullets */
-    padding: 0;
-    margin: 0;
-}
-
-/* sidemenu-item -- Styles items in the side menu. */
-.sidemenu-item {
+/* sidemenu-li -- Styles items in the side menu. */
+.sidemenu li {
     padding: 24px 0px 24px 24px; /* top, right, bottom, left */
     font-size: 18px;
 }
 
-.sidemenu-item:hover {
+/* sidemenu-li -- Styles items in the side menu on hover. */
+.sidemenu li:hover {
     cursor: pointer;
     background-color: var(--item-highlight-color);
     color: var(--main-color);
 }  
-
-.sidemenu-icon-pad {
-    padding-right: 1em;
-}
 
 
 /*************************************************************************
@@ -201,4 +187,29 @@
 .modetab-selected {
     cursor: default;
     border-bottom: 4px solid var(--main-red-color);
+}
+
+/*************************************************************************
+* CSS CLASSES FOR MODE TABS AND PAGES
+*************************************************************************/
+.mode-page {
+    padding-top: 70px;
+}
+
+.mode-page-header {
+    text-align: center;
+    font-size: 48px;
+}
+
+.mode-page-content {
+    text-align: center;
+    font-size: 24px;
+}
+
+.mode-page-icon {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    height: 200px;
+    width: 200px;
 }

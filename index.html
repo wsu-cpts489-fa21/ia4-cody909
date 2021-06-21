@@ -27,7 +27,7 @@
         aria-label="Actions" aria-haspopup="true" 
         aria-expanded="false">
         <span id="menuBtnIcon" 
-          class="navbar-btn-icon fas fa-times"></span>
+          class="navbar-btn-icon fas fa-bars"></span>
       </button>
       <img src="images/sslogo.png" class="navbar-app-icon" 
       alt="SpeedScore logo">
@@ -46,17 +46,15 @@
       </div>
     </header>
     <!--THE SIDE MENU -->
-    <ul id="sideMenu" role="menu" class="sidemenu">
-      <li class="sidemenu-item" 
-        role="menuitem" tabindex="0">
+    <ul id="sideMenu" role="menu" class="sidemenu"
+        arial-labelledby="menuBtn">
+      <li role="menuitem" tabindex="-1">
         Settings
       </li>
-      <li class="sidemenu-item" 
-        role="menuitem" tabindex="0">
+      <li role="menuitem" tabindex="-1">
         About
       </li>
-      <li class="sidemenu-item" 
-        role="menuitem" tabindex="0">
+      <li role="menuitem" tabindex="-1">
         Log Out
       </li>
     </ul>
@@ -88,6 +86,33 @@
         Buddies
       </button>
     </div>
+    <main>
+      <div id="feedModeTab" class="mode-page" role="tabpanel"
+        aria-label="Feed Tab">
+        <h1 class="mode-page-header">Activity Feed</h1>
+        <p class="mode-page-content">This page is under construction.</p>
+        <img class="mode-page-icon" 
+              src="images/sslogo2.png" alt="SpeedScore logo">
+      </div>
+      <div id="roundsModeTab" class="mode-page hidden" role="tabpanel"
+           aria-label="Rounds Tab">
+        <h1 class="mode-page-header">Rounds</h1>
+        <p class="mode-page-content">This page is under construction.</p>
+        <img class="mode-page-icon" src="images/sslogo2.png" alt="SpeedScore logo">
+      </div>
+      <div id="coursesModeTab" role="tabpanel" class="mode-page hidden" 
+           aria-label="Courses Tab">
+        <h1 class="mode-page-header">Courses</h1>
+        <p class="mode-page-content">This page is under construction.</p>
+        <img class="mode-page-icon" src="images/sslogo2.png" alt="SpeedScore logo">
+      </div>
+      <div id="buddiesModeTab" role="tabpanel" class="mode-page hidden" 
+           aria-label="Buddies Tab">
+        <h1 class="mode-page-header">Buddies</h1>
+        <p class="mode-page-content">This page is under construction.</p>
+        <img class="mode-page-icon" src="images/sslogo2.png" alt="SpeedScore logo">
+      </div>
+    </main>
     <script>
     //Begin SCRIPT section of document. Here we define app behavior.
     </script>
