@@ -139,7 +139,6 @@
     background-color: var(--main-color); /* Match to main-color */
     color: var(--text-color);
     list-style-type: none; /* Remove bullets */
-    display: none;
   }
 
 /* sidemenu-li -- Styles items in the side menu. */
@@ -212,4 +211,27 @@
     margin-right: auto;
     height: 200px;
     width: 200px;
+}
+
+/*************************************************************************
+* CSS CLASSES FOR FLOATING ACTION BUTTON
+*************************************************************************/
+/* Float-btn -- Styling for the floating action button. */
+   .float-btn {
+        position:fixed;
+        width: 120px;
+        height: 40px;
+        bottom: 20px;
+        right: 20px;
+        color: var(--text-color);
+        background-color: var(--main-color);
+        border-radius: 50px;
+        text-align: center;
+        box-shadow: 2px 2px 3px #999;
+}
+
+/* float-btn:hover -- When float button is hovered, 
+   change cursor to pointer */
+.float-btn:hover {
+   cursor: pointer;
 }
