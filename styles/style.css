@@ -139,7 +139,13 @@
     background-color: var(--main-color); /* Match to main-color */
     color: var(--text-color);
     list-style-type: none; /* Remove bullets */
+    transition: 0.5s;
+    width: 0px;
   }
+
+.sidemenu-open {
+    width: var(--side-menu-width);
+}
 
 /* sidemenu-li -- Styles items in the side menu. */
 .sidemenu li {
