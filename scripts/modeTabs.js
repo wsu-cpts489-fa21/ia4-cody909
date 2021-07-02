@@ -39,3 +39,55 @@
 for (let i = 0; i < modeTabButtons.length; ++i) {
     modeTabButtons[i].addEventListener("click",() => switchMode(i));
 }
+
+/*************************************************************************
+ * @function keyDownModeTabFocused 
+ * @Desc 
+ * Handles valid keydown events when a mode tab button has the focus, 
+ * Left and Right Arrow change the focus to the previous and 
+ * next tab; Home and End change the focus to the first and last tab; 
+ * Enter or Space selects the currently focused tab.
+ * @param key: the string corresponding the key pressed
+ * @global modeTabButtons: array of HTML mode tab button elements
+ * @global focusedMode: index (into modeTabButtons) of currently focused
+ * mode tab
+ * @global currentMode: index (into modeTabButtons) of current mode
+ *************************************************************************/
+ function keyDownModeTabFocused(key) {
+    if (key =="Enter" || key =="Space") {
+      //Switch to mode corresponding to tab with current focus
+      switchMode(focusedMode); 
+    } else if (key =="ArrowRight") {
+        //shift focus to next mode tab
+        modeTabButtons[focusedMode].setAttribute("tabindex","-1");
+        focusedMode = (focusedMode + 1) % modeTabButtons.length; 
+        modeTabButtons[focusedMode].setAttribute("tabindex","0");
+        modeTabButtons[focusedMode].focus();  
+    }  else if (key == "ArrowLeft") {
+        //shift focus to prev mode tab
+        modeTabButtons[focusedMode].setAttribute("tabindex","-1");
+        focusedMode = (focusedMode - 1 + 
+            modeTabButtons.length) % modeTabButtons.length; 
+        modeTabButtons[focusedMode].setAttribute("tabindex","0");
+        modeTabButtons[focusedMode].focus(); 
+    } else if (key =="Home") {
+        //shift focus to first mode tab
+        modeTabButtons[focusedMode].setAttribute("tabindex","-1");
+        focusedMode = 0; 
+        modeTabButtons[focusedMode].setAttribute("tabindex","0");
+        modeTabButtons[focusedMode].focus(); 
+    } else if (key =="End") {
+        //shift focus to last mode tab
+        modeTabButtons[focusedMode].setAttribute("tabindex","-1");
+        focusedMode = modeTabButtons.length - 1; 
+        modeTabButtons[focusedMode].setAttribute("tabindex","0");
+        modeTabButtons[focusedMode].focus();  
+    } else if (key == "Tab") { 
+        //User is tabbing out of mode tabs. Reset focus to
+        //current mode tab
+        modeTabButtons[focusedMode].setAttribute("tabindex","-1");
+        focusedMode = currentMode; 
+        modeTabButtons[focusedMode].setAttribute("tabindex","0");  
+        modeTabButtons[focusedMode].focus();
+    }  
+}

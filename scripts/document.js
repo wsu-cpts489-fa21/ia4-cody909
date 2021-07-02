@@ -16,5 +16,8 @@
     } else if (document.activeElement.getAttribute("role") 
                === "menuitem") {
         keyDownMenuItemFocused(e.code);
+    } else if (document.activeElement.getAttribute("role") 
+               === "tab") {
+        keyDownModeTabFocused(e.code); 
     }
  });
