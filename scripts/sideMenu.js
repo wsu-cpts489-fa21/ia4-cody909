@@ -31,7 +31,6 @@
     }
 });
 
-
 /*************************************************************************
 * @function keyDownMenuBtnFocused
 * @desc 
@@ -43,9 +42,7 @@
 function keyDownMenuBtnFocused(key) {
     if (key === "ArrowDown" || key === "ArrowUp" ||
             key === "Space" || key === "Enter") {
-            //Open menu
-            menuBtn.click();
-            //Focus menu item
+            menuBtn.click(); //open menu
             if (key === "ArrowUp") { //Focus on last item
                 focusedMenuItem = menuItems.length-1;
             } else { //Focus on first item
@@ -58,7 +55,7 @@ function keyDownMenuBtnFocused(key) {
 /*************************************************************************
 * @function keyDownMenuItemFocused
 * @desc 
-* Handle keypress when the menu is open and an item has focus. Per Table
+* Handle keypress when menu is open and an item has focus. Per Table
 * 4.1 from the book, we handle the following key presses: tab, enter
 * escape, up arrow, down arrow, home, and end. 
 * are the arrow keys, space, and enter. All other keys are ignored.
@@ -66,29 +63,28 @@ function keyDownMenuBtnFocused(key) {
 * The code of the key that was pressed.
 * @globals
  * focusedMenuitem is the index of the currently focused menu item
- * menuItems is an array of the HTML elements that are menu items
+ * menuItems is an array of the HTML elements that are menu items   
  * menuBtn is a reference to the menu button HTML element
 *************************************************************************/
-function keyDownMenuItemFocused(key) {
-    if (key == "Enter") { //Close menu and refocus on menu btn
-        menuBtn.click();
-        menuBtn.focus();        
-    } else if (key === "Tab") { //Exit out of menu
-        menuBtn.click();
-    } else if (key == "Escape") {
+function keyDownMenuItemFocused(key) {  
+    if (key == "Enter") { //Activate focused menu item
+        document.activeElement.click();
+    } else if (key === "Tab") { //Close menu
+       menuBtn.click();
+    } else if (key == "Escape") { //Close menu
         menuBtn.click();
         menuBtn.focus();
-    } else if (key === "ArrowUp") { 
+    } else if (key === "ArrowUp") {  //Focus on next item
         focusedMenuItem = (focusedMenuItem - 1 + menuItems.length) 
           % menuItems.length;
         menuItems[focusedMenuItem].focus();
-    } else if (key === "ArrowDown") { 
+    } else if (key === "ArrowDown") {  //Focus on prev item
         focusedMenuItem = (focusedMenuItem + 1) % menuItems.length;
         menuItems[focusedMenuItem].focus();
-    } else if (key === "Home") {
+    } else if (key === "Home") { //Focus on first item
         focusedMenuItem = 0;
         menuItems[focusedMenuItem].focus();
-    } else if (key === "End") {
+    } else if (key === "End") { //Focus on last item
         focusedMenuItem = menuItems.length - 1;
         menuItems[focusedMenuItem].focus();
     } 

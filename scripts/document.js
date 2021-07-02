@@ -11,7 +11,6 @@
  * keypress based on which user interface element currently has focus. 
  *************************************************************************/
  document.addEventListener("keydown", function(e) { 
-    
     if (document.activeElement.id === "menuBtn") {
         keyDownMenuBtnFocused(e.code); 
     } else if (document.activeElement.getAttribute("role") 
