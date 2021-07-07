@@ -14,16 +14,14 @@
  *************************************************************************/
 for (let i = 0; i < modeActionButtons.length; ++i) {
     modeActionButtons[i].addEventListener("click",function(e) {
-        //Hide and disable all UI elements except for dialog box
-        menuBtn.classList.add("disabled");
-        menuBtn.setAttribute("tabindex","-1");
-        searchBtn.classList.add("disabled");
-        searchBtn.setAttribute("tabindex","-1");
-        profileBtn.classList.add("disabled");
-        profileBtn.setAttribute("tabindex","-1");
-        skipLink.classList.add("hidden"); 
-        modeTabsContainer.classList.add("hidden"); //Hide mode tabs
+        //Hide tab panel
         modeTabPanels[currentMode].classList.add("hidden");
+        //Hide and disable all UI elements
+        menuBtn.classList.add("disabled");
+        searchBtn.classList.add("disabled");
+        profileBtn.classList.add("disabled");
+        skipLink.classList.add("hidden"); 
+        modeTabsContainer.classList.add("disabled");
         //Show dialog box
         modeActionDialogs[currentMode].classList.remove("hidden");
         //Set focus to dialog box's action button
@@ -50,16 +48,17 @@ for (let i = 0; i < dialogActionButtons.length; ++i) {
     dialogActionButtons[i].addEventListener("click",function(e) {
         //Hide dialog box
         modeActionDialogs[currentMode].classList.add("hidden");
-        //Showand enable other UI elements
-        menuBtn.classList.remove("disabled");
-        searchBtn.classList.remove("disabled");
-        profileBtn.classList.remove("disabled");
-        skipLink.classList.remove("hidden"); 
-        modeTabsContainer.classList.remove("hidden"); //Hide mode tabs
+        //Show tab panel
         modeTabPanels[currentMode].classList.remove("hidden");
-        //TO DO: Implement mode-specific functionality
+        //Show and enable other UI elements
+        menuBtn.classList.remove("disabled");       
+        searchBtn.classList.remove("disabled"); 
+        profileBtn.classList.remove("disabled");                                 
+        skipLink.classList.remove("hidden"); 
+        modeTabsContainer.classList.remove("disabled"); 
         //Set focus to floating action button
         modeActionButtons[currentMode].focus();
+        //TO DO: Implement mode-specific functionality
     });
 }
 
@@ -88,15 +87,48 @@ for (let i = 0; i < dialogCancelButtons.length; ++i) {
         searchBtn.classList.remove("disabled");
         profileBtn.classList.remove("disabled");
         skipLink.classList.remove("hidden"); 
-        modeTabsContainer.classList.remove("hidden"); //Hide mode tabs
+        modeTabsContainer.classList.remove("disabled");
         modeTabPanels[currentMode].classList.remove("hidden");
         //Set focus to floating action button
         modeActionButtons[currentMode].focus();
     });
 }
 
-function keyDownCancelBtnFocused(e) {
-    if (e.code === "Tab") {
+/*************************************************************************
+ * @function keyDownDialogFocused
+ * @Desc 
+ * When the user issues a keypress when a dialog box is open,
+ * we need to see if it is a tab or escape. If tab, we ensure that the
+ * user stays within the dialog. If escape, we cancel out of dialog.
+ * @param e, the keyboard event. e.code gives code of key pressed.                  
+ * @global modeActionDialogs: array of dialog boxes for each mode
+ * @global dialogActionButtons: array of default ("OK") buttons for
+ * each mode's dialog box
+ * @global dialogCancelButtons: array of cancel buttons for
+ * each mode's dialog box
+ *************************************************************************/
+function keyDownDialogFocused(e) {
+    if (document.activeElement.classList
+        .   contains("action-button") && 
+        e.code === "Tab" && e.shiftKey) {
+        //User is shift-tabbing from first focusable item in dialog. 
+        //Prevent tab to URL bar by explicitly setting focus to 
+        //last focusable item in dialog. 
+        modeActionDialogs[currentMode].focus();
+        e.preventDefault()
+    } else if (document.activeElement.classList
+        .contains("cancel-button") && e.code === "Tab" &&
+        !e.shiftKey) {
+        //User is tabbing from last focusable item in a dialog. 
+        //Prevent tab to URL bar by explicitly setting focus 
+        //to first focusable item in dialog.
+        modeActionDialogs[currentMode].focus();     
+        e.preventDefault();
+    } else if (document.activeElement.hasAttribute("role") && 
+               e.code === "Tab" && e.shiftKey) {
         dialogCancelButtons[currentMode].focus();
+        e.preventDefault();
+    } else if (e.code === "Escape") { //Close and cancel
+        dialogCancelButtons[currentMode].click();
     }
 }

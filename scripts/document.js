@@ -23,22 +23,7 @@
         //User is pressing a key when mode tab is focused
         keyDownModeTabFocused(e.code); 
     } else if (document.activeElement.classList
-        .contains("cancel-button") && e.code === "Tab") {
-        //User is tabbing from last focusable item in a modal 
-        //dialog. Prevent tab to URL bar by explicitly setting focus 
-        //to first focusable item in modal dialog, per accessibility guidelines
-        if (e.shiftKey) {
-            dialogActionButtons[currentMode].focus();
-        } else {
-            modeActionDialogs[currentMode].focus();
-        }
-        e.preventDefault();
-    } else if (document.activeElement.classList.contains("action-dialog") && 
-               e.code === "Tab" && e.shiftKey) {
-        //User is shift-tabbing from first focusable item in a modal 
-        //dialog. Prevent tab to URL bar by explicitly setting focus to 
-        //last focusable item in modal dialog, per accessibility guidelines. 
-        dialogCancelButtons[currentMode].focus();
-        e.preventDefault();
+        .contains("action-dialog")) {
+            keyDownDialogFocused(e);
     }
  });

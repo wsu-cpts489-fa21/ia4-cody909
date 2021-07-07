@@ -23,22 +23,24 @@ const modeTabButtons =
 const modeTabPanels = 
   document.querySelectorAll("div[role='tabpanel']");
 
-  /* The following variables help us manage the floating action buttons */
-  //Array of mode action buttons
-  const modeActionButtons = 
-    document.querySelectorAll(".float-btn");
-  //array of mode action dialog boxes
-  const modeActionDialogs =
-    document.querySelectorAll("div.action-dialog");
-  const dialogActionButtons =
-    document.querySelectorAll("button.action-button");
-  const dialogCancelButtons =
-    document.querySelectorAll("button.cancel-button");
+/* The following variables help us manage the floating
+   action butons and their corresponding dialog boxes
+*/
+//Array of mode action buttons
+const modeActionButtons = 
+document.querySelectorAll("button.float-btn");
+//array of mode action dialog boxes
+const modeActionDialogs =
+document.querySelectorAll("div.action-dialog");
+//array of "OK" buttons within the dialog boxes
+const dialogActionButtons =
+document.querySelectorAll("button.action-button");
+//array of "Cancel" buttons within the dialog boxes
+const dialogCancelButtons =
+document.querySelectorAll("button.cancel-button");
 
-
-    /* The following variables help us to hide and show user interface
-       elements when we switch to action dialog boxes. */
-    const searchBtn = document.getElementById("searchBtn");
-    const profileBtn = document.getElementById("profileBtn");
-    const skipLink = document.getElementById("sLink");
-    const modeTabsContainer = document.getElementById("modeTabs");
+//Variables to provide easy access to UI elements 
+const searchBtn = document.getElementById("searchBtn");
+const profileBtn = document.getElementById("profileBtn");
+const skipLink = document.getElementById("sLink");
+const modeTabsContainer = document.getElementById("modeTabs");
