@@ -22,8 +22,28 @@
 * GLOBAL CSS CLASSES
 * These are global classes that care useful for a variety of elements.
 *************************************************************************/
+/* This CSS definition gives all focusable items a shadowed blue outline 
+   when they have the focus. This is recommended as a  highly visible 
+   focus technique for keyboard users. 
+*/
+
+*:focus {
+    border: 3px solid #94BFF9 !important;
+    border-radius: 3px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 
+       0 0 3px rgba(102, 175, 233, 0.6);
+    outline: 0 none;
+  }
+  button::-moz-focus-inner {
+    border: 0;
+  }
+
 .hidden {
-    display: none;
+    display: none !important;
+}
+
+.disabled {
+    pointer-events: none;
 }
 
 /*************************************************************************
@@ -139,7 +159,13 @@
     background-color: var(--main-color); /* Match to main-color */
     color: var(--text-color);
     list-style-type: none; /* Remove bullets */
+    transition: 0.5s;
+    width: 0px;
   }
+
+.sidemenu-open {
+    width: var(--side-menu-width);
+}
 
 /* sidemenu-li -- Styles items in the side menu. */
 .sidemenu li {
@@ -185,7 +211,7 @@
 /* .modetab-selected -- Style the selected mode tab */
 .modetab-selected {
     cursor: default;
-    border-bottom: 4px solid var(--main-red-color);
+    border-bottom: 4px solid var(--main-red-color) !important;
 }
 
 /*************************************************************************
@@ -211,6 +237,24 @@
     margin-right: auto;
     height: 200px;
     width: 200px;
+}
+
+.mode-page-btn-container {
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    width: 25%;  
+}
+
+.mode-page-btn {
+    display: inline;
+    font-size: 18px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    color: var(--text-color);
+    background-color: var(--main-color);
+    cursor: pointer;
 }
 
 /*************************************************************************
