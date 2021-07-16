@@ -16,6 +16,7 @@
       crossorigin="anonymous"></script>
       <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet">
+    <!-- CSS -->
     <!-- Import local stylesheet -->
     <link rel="stylesheet" href="styles/style.css">
   </head>
@@ -205,30 +206,30 @@
       <div id="loginPage" class="mode-page">
         <h1 class="mode-page-header">Log In</h1>
         <form class="centered">
-              <label for="email" class="form-label">Email:
-                  <input id="email" type="email" class="form-field"
+              <label for="email" class="fm-label">Email:
+                  <input id="email" type="email" class="fm-field"
                   aria-describedby="loginIdDescr"
                   required>
               </label>
-              <div id=loginIdDescr class="form-field-descr">
+              <div id=loginIdDescr class="fm-field-descr">
                 Enter a valid email address.
               </div>
-              <label for="password" class="form-label">Password: 
-                  <input id="password" type="password" class="form-field"
+              <label for="password" class="fm-label">Password: 
+                  <input id="password" type="password" class="fm-field"
                   pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$"
                   aria-describedby="passwordDescr"
                   required>
               </label>
-              <div id=passwordDescr class="form-field-descr">
+              <div id=passwordDescr class="fm-field-descr">
                 Passwords must be at least 8 characters long with at least one number, 
                 one lower case letter, and one upper case letter.
               </div>
           <p></p>
-          <button type="submit" id="loginBtn" class="form-btn">
+          <button type="submit" id="loginBtn" class="fm-btn">
               Log In
           </button>
         </form>
-        </div>            
+      </div>            
     </main>
     <script src="scripts/main.js"></script>
     <script src="scripts/sideMenu.js"></script>
