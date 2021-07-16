@@ -2,7 +2,7 @@
 <html>
   <head>
     <!-- Title displays in page's tab.  -->
-    <title>SpeedScore</title>
+    <title>Log in to SpeedScore</title>
     <!-- Define Favicon -->
     <link rel='shortcut icon' type='image/x-icon' 
           href="images/ssfavicon.ico"/>
@@ -203,9 +203,10 @@
         </div>
       </div>
       <div id="loginPage" class="mode-page">
+        <h1 class="mode-page-header">Log In</h1>
         <form class="centered">
               <label for="email" class="form-label">Email:
-                  <input id="loginId" type="email" class="form-field"
+                  <input id="email" type="email" class="form-field"
                   aria-describedby="loginIdDescr"
                   required>
               </label>
@@ -215,9 +216,10 @@
               <label for="password" class="form-label">Password: 
                   <input id="password" type="password" class="form-field"
                   pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$"
+                  aria-describedby="passwordDescr"
                   required>
               </label>
-              <div id=loginIdDescr class="form-field-descr">
+              <div id=passwordDescr class="form-field-descr">
                 Passwords must be at least 8 characters long with at least one number, 
                 one lower case letter, and one upper case letter.
               </div>
