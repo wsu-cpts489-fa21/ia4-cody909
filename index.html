@@ -24,7 +24,7 @@
     <header class="navbar"> 
       <a id="sLink" class="skip-link" tabindex="0">
         Skip to content</a>  
-      <button id="menuBtn" type="button" class="navbar-btn" 
+      <button id="menuBtn" type="button" class="navbar-btn hidden" 
         title="Menu" aria-controls="sideMenu" 
         aria-label="Actions" aria-haspopup="true" 
         aria-expanded="false">
@@ -35,11 +35,11 @@
       alt="SpeedScore logo">
       <h1 id="appName" class="navbar-title">SpeedScore</h1> 
       <div class="navbar-right-items">
-        <button  id="searchBtn" type="button" class="navbar-btn" 
+        <button  id="searchBtn" type="button" class="navbar-btn hidden" 
           title="Search" aria-label="Search">
           <span class="navbar-btn-icon fas fa-search"></span>
         </button>
-        <button id="profileBtn" type="button" class="navbar-btn" 
+        <button id="profileBtn" type="button" class="navbar-btn hidden" 
           title="Edit Profile" aria-label="Account Settings">
           <img class="navbar-profile-pic" 
             src="images/ChrisProfilePic.jpg" 
@@ -61,7 +61,7 @@
       </li>
     </ul>
     <!-- "MODE" TABS -->
-    <div id="modeTabs" class="modetab-container" role="tablist" 
+    <div id="modeTabs" class="modetab-container hidden" role="tablist" 
       aria-label="App Modes">
       <button id="feedMode" type="button" 
         class="modetab-btn modetab-selected" 
@@ -89,7 +89,7 @@
       </button>
     </div>
     <main>
-      <div id="feedModeTab" class="mode-page" role="tabpanel"
+      <div id="feedModeTab" class="mode-page hidden" role="tabpanel"
         aria-label="Feed Tab" tabindex="0">
         <h1 class="mode-page-header">Activity Feed</h1>
         <p class="mode-page-content">This page is under construction.</p>
@@ -201,7 +201,33 @@
                   class="mode-page-btn action-dialog cancel-button"
                   type="button">Cancel</button>
         </div>
-      </div>        
+      </div>
+      <div id="loginPage" class="mode-page">
+        <form class="centered">
+              <label for="email" class="form-label">Email:
+                  <input id="loginId" type="email" class="form-field"
+                  aria-describedby="loginIdDescr"
+                  pattern="\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b"
+                  required>
+              </label>
+              <div id=loginIdDescr class="form-field-descr">
+                Enter a valid email address.
+              </div>
+              <label for="password" class="form-label">Password: 
+                  <input id="password" type="password" class="form-field"
+                  pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$"
+                  required>
+              </label>
+              <div id=loginIdDescr class="form-field-descr">
+                Passwords must be at least 8 characters long with at least one number, 
+                one lower case letter, and one upper case letter.
+              </div>
+          <p></p>
+          <button type="submit" id="loginBtn" class="form-btn">
+              Log In
+          </button>
+        </form>
+        </div>            
     </main>
     <script src="scripts/main.js"></script>
     <script src="scripts/sideMenu.js"></script>
