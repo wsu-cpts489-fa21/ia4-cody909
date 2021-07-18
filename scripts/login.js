@@ -1,3 +1,4 @@
+const loginForm = document.getElementById("loginForm");
 const loginBtn = document.getElementById("loginBtn");
 const emailField = document.getElementById("email");
 const passwordField = document.getElementById("password");
@@ -5,9 +6,9 @@ const errBox = document.getElementById("errorBox");
 const emailErr = document.getElementById("emailError");
 const passwordErr = document.getElementById("passwordError");
 
-loginBtn.addEventListener("click",function(e) {
-   e.preventDefault();
-   let emailValid = !emailField.validity.typeMismatch && !emailField.validity.valueMissing;
+loginForm.addEventListener("submit",function(e) {
+    e.preventDefault();
+    let emailValid = !emailField.validity.typeMismatch && !emailField.validity.valueMissing;
    let passwordValid = !passwordField.validity.patternMismatch && !passwordField.validity.valueMissing;
    if (emailValid && passwordValid) {
       errBox.classList.add("hidden");
@@ -29,15 +30,5 @@ loginBtn.addEventListener("click",function(e) {
        }
    } else {
        passwordErr.classList.add("hidden");
-   }
-});
-
-emailField.addEventListener("keypress",function(e) {
-    if (e.code === "Enter")
-        loginBtn.click();
-});
-
-passwordField.addEventListener("keypress",function(e) {
-    if (e.code === "Enter")
-     loginBtn.click();
+   } 
 });
