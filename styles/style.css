@@ -134,11 +134,17 @@
 /* navbar-profile-pic styles the user's profile picture 
    that appears in the navbar 
 */
+.navbar-profile-btn {
+    margin-left: 8px;
+    margin-right: 8px;
+    height: 44px;
+    width: 44px;
+    background-image: url("../images/GenericProfilePic.jpg");
+    background-size: cover;
+}
+
 .navbar-profile-pic {
-    cursor: pointer;
-    height: 46px;
-    width: auto;
-    margin-left: 16px;
+    background-size: cover;
 }
 
 /*************************************************************************
@@ -187,7 +193,7 @@
 /* .modetab -- Style the container enclosing the mode tabs */
 .modetab-container {
     position: fixed;
-    top: 56px;
+    top: 60px;
     left: 0px;
     width: 100%;
     z-index: 150;
@@ -217,8 +223,9 @@
 /*************************************************************************
 * CSS CLASSES FOR MODE TABS AND PAGES
 *************************************************************************/
+
 .mode-page {
-    padding-top: 70px;
+    padding-top: 100px;
 }
 
 .mode-page-header {
@@ -280,9 +287,6 @@
    cursor: pointer;
 }
 
-/*************************************************************************
-* CSS CLASSES FOR FORMS
-*************************************************************************/
 .fm-label {
     font-weight: bold;
     font-size: 24px;
@@ -312,4 +316,9 @@
 .centered {
     text-align: center;
 }
+
+.highlight-error {
+    background-color: #ffdddd;
+}
+    
   

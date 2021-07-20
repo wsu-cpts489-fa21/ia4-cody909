@@ -1,7 +1,9 @@
 /*************************************************************************
- * File: sideMenu.js
+ * File: main.js
  * Definitions of global variables to maintain app state and provide
- * convenient access to frequently used DOM elements. 
+ * convenient access to frequently used DOM elements. Also included are
+ * general-purpose functions that are not associated with any particular
+ * area of the app.
  ************************************************************************/
 
 /* The following variables help us manage the menu */
@@ -39,8 +41,18 @@ document.querySelectorAll("button.action-button");
 const dialogCancelButtons =
 document.querySelectorAll("button.cancel-button");
 
-//Variables to provide easy access to UI elements 
+//Global variables to provide easy access to UI elements 
 const searchBtn = document.getElementById("searchBtn");
 const profileBtn = document.getElementById("profileBtn");
 const skipLink = document.getElementById("sLink");
 const modeTabsContainer = document.getElementById("modeTabs");
+
+//Global variables to provide easy access elements in login page and form
+const loginPage = document.getElementById("loginPage");
+const loginForm = document.getElementById("loginForm");
+const emailField = document.getElementById("email");
+const passwordField = document.getElementById("password");
+const errBox = document.getElementById("errorBox");
+const emailErr = document.getElementById("emailError");
+const passwordErr = document.getElementById("passwordError");
+

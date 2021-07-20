@@ -44,12 +44,9 @@
           title="Search" aria-label="Search">
           <span class="navbar-btn-icon fas fa-search"></span>
         </button>
-        <button id="profileBtn" type="button" class="navbar-btn hidden" 
+        <button id="profileBtn" type="button" class="navbar-btn navbar-profile-btn hidden" 
           title="Edit Profile" aria-label="Account Settings">
-          <img class="navbar-profile-pic" 
-            src="images/ChrisProfilePic.jpg" 
-            alt="User's profile picture">
-        </button>  
+        </button> 
       </div>
     </header>
     <!--THE SIDE MENU -->
@@ -220,7 +217,7 @@
                   aria-describedby="loginIdDescr"
                   required>
               </label>
-              <div id=loginIdDescr class="form-text">
+              <div id=emailDescr class="form-text">
                 Enter a valid email address.
               </div>
             </div>
@@ -232,7 +229,7 @@
                   required>
               </label>
               <div id=passwordDescr class="form-text">
-                Passwords must be a t least 8 characters long with at least one number, 
+                Passwords must be at least 8 characters long with at least one number, 
                 one lower case letter, and one upper case letter.
               </div>
             </div>
