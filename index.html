@@ -28,7 +28,7 @@
     <!-- The TOP NAVIGATION BAR -->
     <header class="navbar"> 
       <a id="sLink" class="skip-link" tabindex="0">
-        Skip to content</a>  
+         Skip to content</a>
       <button id="menuBtn" type="button" class="navbar-btn hidden" 
         title="Menu" aria-controls="sideMenu" 
         aria-label="Actions" aria-haspopup="true" 
@@ -234,8 +234,13 @@
               </div>
             </div>
           <p></p>
-          <button type="submit" id="loginBtn" class="btn btn-primary fm-btn">
-              Log In
+          <button type="submit" id="loginBtn" 
+                  class="btn btn-primary fm-btn" 
+                  aria-live="polite" aria-loading="false">
+              <span id="loginBtnIcon" 
+                  class="fas fa-sign-in-alt" 
+                  aria-hidden="true"></span>
+                  &nbsp;Log In
           </button>
         </form>
       </div>            

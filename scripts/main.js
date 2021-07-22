@@ -41,7 +41,7 @@ document.querySelectorAll("button.action-button");
 const dialogCancelButtons =
 document.querySelectorAll("button.cancel-button");
 
-//Global variables to provide easy access to UI elements 
+//Global variables to provide easy access to UI elements
 const searchBtn = document.getElementById("searchBtn");
 const profileBtn = document.getElementById("profileBtn");
 const skipLink = document.getElementById("sLink");
@@ -55,4 +55,6 @@ const passwordField = document.getElementById("password");
 const errBox = document.getElementById("errorBox");
 const emailErr = document.getElementById("emailError");
 const passwordErr = document.getElementById("passwordError");
+const loginBtnIcon = document.getElementById("loginBtnIcon");
+const loginBtn = document.getElementById("loginBtn");
 
