@@ -250,7 +250,8 @@
     display: flex;
     justify-content: center;
     margin: auto;
-    width: 25%;  
+    width: 80%;  
+    gap: 10%;
 }
 
 .mode-page-btn {
@@ -287,6 +288,9 @@
    cursor: pointer;
 }
 
+/*************************************************************************
+* CSS CLASSES FOR FORMS
+*************************************************************************/
 .fm-label {
     font-weight: bold;
     font-size: 24px;
@@ -304,13 +308,17 @@
     padding-bottom: 16px;
 }
 
-.fm-btn {
+.fm-primary-btn {
     width:70%; 
     padding-top: 8px;
     padding-bottom: 8px;
     font-size: 36px;
     color: var(--text-color);
     background-color: var(--main-color);
+}
+
+.fm-profile-pic {
+    padding-bottom: 8px;
 }
 
 .centered {
@@ -320,4 +328,26 @@
 .highlight-error {
     background-color: #ffdddd;
 }    
-  
+
+/*************************************************************************
+* CSS CLASSES FOR DIALOGS
+*************************************************************************/
+
+.dialog-primary-btn {
+    width:35%; 
+    padding-top: 8px;
+    padding-bottom: 8px;
+    padding-right: 8px;
+    font-size: 24px;
+    color: var(--text-color);
+    background-color: var(--main-color);
+}
+
+.dialog-cancel-btn {
+    width:35%; 
+    padding-top: 8px;
+    padding-bottom: 8px;
+    font-size: 24px;
+    color: var(--text-color);
+    background-color: var(--main-red-color);
+}
