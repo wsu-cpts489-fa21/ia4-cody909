@@ -1,3 +1,38 @@
+ /*************************************************************************
+ * File: createAccount.js
+ * This file contains functions that support the "Create Account" Dialog.
+ ************************************************************************/
+
+ let firstFocusableCreateAccountItem = acctEmailField;
+
+ /*************************************************************************
+ * @function createAccountBtn CLICK Handler 
+ * @Desc 
+ * When the user clicks the "Create Account" button link on the "Log In"
+ * page, transition to the "Create Account" dialog.
+ * @global createAccountDialog: The "Create Account" dialog
+ * @global loginPage: The Log In page
+ *************************************************************************/
+createAccountBtn.addEventListener("click",function(e) {
+    loginPage.classList.add("hidden");
+    createAccountDialog.classList.remove("hidden");
+    document.title = "Create Account";
+    acctEmailField.focus();
+});
+
+/*************************************************************************
+ * @function acctProfilePicField CHANGE Handler 
+ * @Desc 
+ * When the user finishes interacting with the File picker dialog box,
+ * update the user's profile picture based on the selection from the
+ * file picker. If the user cancels out of the File Picker, the input
+ * element's value will be empty and we set the profile picture to the
+ * default picture.
+ * @global acctProfilePicField: The "Create Account" form field 
+ *         containing the optional profile picture
+ * @global acctProfilePicImage: The "Create Account" <img> element that
+ *         displays the user's profile picture (possibly the default)
+ *************************************************************************/
 acctProfilePicField.addEventListener("change",function(e) {
     if (acctProfilePicField.value.length !== 0) {
         const reader = new FileReader();
@@ -6,23 +41,36 @@ acctProfilePicField.addEventListener("change",function(e) {
             acctProfilePicImage.setAttribute("src",this.result);
         });
     } else {
-        acctProfilePicImage.setAttribute("src","images/GenericProfilePic.jpg");
+        acctProfilePicImage.setAttribute("src",defaultProfilePic);
     }
 });
 
-createAccountBtn.addEventListener("click",function(e) {
-    loginPage.classList.add("hidden");
-    createAccountDialog.classList.remove("hidden");
-    document.title = "Create Account";
-});
-
+/*************************************************************************
+ * @function resetCreateAccountForm 
+ * @Desc 
+ * When the user exits the "Create Account" Dialog, reset the form to
+ * show blank data in case the form is visited again.
+ * @global acctEmailField: Form's email field
+ * @global acctPasswordField: Form's password field
+ * @global acctPasswordRepeatField: Form's repeat pw field
+ * @global acctDisplayNameField: Form's display name field
+ * @global acctSecurityQuestionField: Form's security q field
+ * @global acctSecurityAnswerField: Form's security answ field
+ * @global acctErrBox: <div> containing the error messages
+ * @global acctEmailErr: Error message for email field
+ * @global acctPasswordErr: Error message for password field
+ * @global acctRepeatPasswordErr: Error message for repeat pw field
+ * @global acctDisplaynameErr: Error message for display name field
+ * @global acctSecurityQuestionErr: Error message for security q field
+ * @global acctSecurityAnswerErr: Error message for security answ field
+ *************************************************************************/
 function resetCreateAccountForm() {
     acctEmailField.value = "";
     acctPasswordField.value = "";
     acctPasswordRepeatField.value = "";
     acctDisplayNameField.value = "";
     acctProfilePicField.value = "";
-    acctProfilePicImage.setAttribute("src","images/GenericProfilePic.jpg");
+    acctProfilePicImage.setAttribute("src",defaultProfilePic);
     acctSecurityQuestionField.value = "";
     acctErrBox.classList.add("hidden");
     acctSecurityAnswerField.value = "";
@@ -32,6 +80,7 @@ function resetCreateAccountForm() {
     acctDisplayNameErr.classList.add("hidden");
     acctSecurityQuestionErr.classList.add("hidden");
     acctSecurityAnswerErr.classList.add("hidden");
+    firstFocusableCreateAccountItem = acctEmailField;
 }
 
 function createAccount(newAcct) {
@@ -83,11 +132,12 @@ function createAccount(newAcct) {
                               !acctSecurityAnswerField.validity.valueMissing;
     if (emailValid && passwordValid && repeatPasswordValid &&
         displayNameValid && securityQuestionValid & securityAnswerValid) { 
-        //All is well
+        //All is well -- Call createAccount()
        createAccount({email: acctEmailField.value, 
                       password: acctPasswordField.value,
                       displayName: acctDisplayNameField.value,
-                      profilePic: acctProfilePicImage.getAttribute("src"),
+                      profilePic: (acctProfilePicImage.getAttribute("src").charAt(0) === "d" ? 
+                                    acctProfilePicImage.getAttribute("src") : ""),
                       securityQuestion: acctSecurityQuestionField.value,
                       securityAnswer: acctSecurityAnswerField.value
                     });
@@ -100,44 +150,89 @@ function createAccount(newAcct) {
     if (!securityAnswerValid) { //Display name field is invalid
         acctSecurityAnswerErr.classList.remove("hidden");
         acctSecurityAnswerErr.focus();
+        firstFocusableCreateAccountItem = acctSecurityAnswerErr;
     } else {
         acctSecurityAnswerErr.classList.add("hidden");
     }
     if (!securityQuestionValid) { //Display name field is invalid
         acctSecurityQuestionErr.classList.remove("hidden");
         acctSecurityQuestionErr.focus();
+        firstFocusableCreateAccountItem = acctSecurityQuestionErr;
     } else {
         acctSecurityQuestionErr.classList.add("hidden");
     } 
     if (!displayNameValid) { //Display name field is invalid
         acctDisplayNameErr.classList.remove("hidden");
         acctDisplayNameErr.focus();
+        firstFocusableCreateAccountItem = acctDisplayName;
     } else {
         acctDisplayNameErr.classList.add("hidden");
     } 
     if (!repeatPasswordValid) { //Password repeat field is invalid
         acctPasswordRepeatErr.classList.remove("hidden");
         acctPasswordRepeatErr.focus();
+        firstFocusableCreateAccountItem = acctPasswordRepeatErr;
     } else {
         acctPasswordRepeatErr.classList.add("hidden");
     } 
     if (!passwordValid) { //Password field is invalid
         acctPasswordErr.classList.remove("hidden");
         acctPasswordErr.focus();
+        firstFocusableCreateAccountItem = acctPasswordErr;
     } else {
         acctPasswordErr.classList.add("hidden");
     } 
     if (!emailValid) { //Email field is invalid
         acctEmailErr.classList.remove("hidden");
         acctEmailErr.focus();
+        firstFocusableCreateAccountItem = acctEmailErr;
     } else {
         acctEmailErr.classList.add("hidden");
     }
  });
 
+ /*************************************************************************
+ * @function cancelCreateAccountBtn CLICK Handler 
+ * @Desc 
+ * When the user clicks the "Cancel" button to exit "Create Account" Dialog, 
+ * reset the form and transition to the Log In page.
+ * @global createAccountDialog: The "Create Account" dialog
+ * @global loginPage: The Log In page
+ *************************************************************************/
  cancelCreateAccountBtn.addEventListener("click",function(e) {
+    resetCreateAccountForm();
     document.title = "Log In to SpeedScore";
     createAccountDialog.classList.add("hidden");
     loginPage.classList.remove("hidden");
 });
 
+/*************************************************************************
+ * @function keyDownCreateDialogFocused 
+ * @desc 
+ * When the user presses a key with an element in the Create Account 
+ * dialog focused, we implement the accessible keyboard interface for
+ * a modal dialog box. This means that "Escape" dismisses the dialog and
+ * that it is impossible to tab outside of the dialog box.
+ * @global createAccountDialog: The "Create Account" dialog
+ * @global loginPage: The Log In page
+ *************************************************************************/
+function keyDownCreateDialogFocused(e) {
+    if (e.code === "Escape") {
+        cancelCreateAccountBtn.click();
+        return;
+    }
+    if (e.code === "Tab" && document.activeElement == firstFocusableCreateAccountItem &&
+       e.shiftKey) {
+        //shift focus to last focusable item in dialog
+        cancelCreateAccountBtn.focus();
+        e.preventDefault();
+        return;
+    }
+    if (e.code === "Tab" && document.activeElement == cancelCreateAccountBtn &&
+        !e.shiftKey) {
+        //shift focus to first focusable item in dialog
+        firstFocusableCreateAccountItem.focus();
+        e.preventDefault()
+        return;
+    }
+}

@@ -10,8 +10,6 @@
 let focusedMenuItem = 0; //Array index of the menu item with focus
 //Array of the HTML elements that are menu items
 const menuItems = document.querySelectorAll("li[role='menuitem']");
-//Reference to the menuBtn element, which is frequently accessed.
-const menuBtn =  document.getElementById("menuBtn"); 
 
 //Global variables to help manage the mode tabs
 let currentMode = 0; //The index of app's current mode
@@ -39,6 +37,8 @@ const dialogCancelButtons =
 document.querySelectorAll("button.cancel-button");
 
 //Global variables to provide easy access to top-level UI elements
+const menuBtn =  document.getElementById("menuBtn"); 
+const sideMenu = document.getElementById("sideMenu");
 const searchBtn = document.getElementById("searchBtn");
 const profileBtn = document.getElementById("profileBtn");
 const skipLink = document.getElementById("sLink");
@@ -59,6 +59,7 @@ const resetPasswordBtn = document.getElementById("resetPasswordBtn");
 
 //Global variables to provide easy access to Create Account Dialog elements
 const createAccountDialog = document.getElementById("createAccountDialog");
+const submitCreateAccountBtn = document.getElementById("submitCreateAccountBtn");
 const cancelCreateAccountBtn = document.getElementById("cancelCreateAccountBtn");
 const acctErrBox = document.getElementById("acctErrorBox");
 const acctEmailField = document.getElementById("acctEmail");
@@ -75,3 +76,6 @@ const acctPasswordRepeatErr = document.getElementById("acctPasswordRepeatError")
 const acctDisplayNameErr = document.getElementById("acctDisplayNameError");
 const acctSecurityQuestionErr = document.getElementById("acctSecurityQuestionError");
 const acctSecurityAnswerErr = document.getElementById("acctSecurityAnswerError");
+
+//Default profile picture
+defaultProfilePic = "../images/DefaultProfilePic.jpg";

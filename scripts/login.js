@@ -1,7 +1,8 @@
 /*************************************************************************
- * login.js -- This file contains the global variables and functions 
- * to support the log in page
+ * File: login.js
+ * This file contains functions that support the log in page.
 *************************************************************************/
+
 
 /*************************************************************************
  * @function resetLoginForm
@@ -16,7 +17,7 @@
  * @global loginBtn: The Log In button
  *************************************************************************/
 function resetLoginForm() {
-    document.title = "Login in to SpeedScore";
+    document.title = "Log in to SpeedScore";
     errBox.classList.add("hidden");
     emailErr.classList.add("hidden");
     passwordErr.classList.add("hidden");
@@ -48,6 +49,7 @@ function loginFinish(userId) {
     modeTabsContainer.classList.remove("hidden");
     modeTabPanels[currentMode].classList.remove("hidden");
     menuBtn.classList.remove("hidden");
+    sideMenu.classList.remove("hidden");
     searchBtn.classList.remove("hidden");
     profileBtn.classList.remove("hidden");
     document.title = "SpeedScore: Activity Feed";
