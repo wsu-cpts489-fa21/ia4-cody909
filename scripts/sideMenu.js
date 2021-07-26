@@ -6,11 +6,11 @@
 /*************************************************************************
  * @function menuBtn click handler
  * @desc 
- * When the user clicks the menuBtn, open or close the side menu 
+ * When the user clicks the menuBtn, open or close the side menu 5
  * based on current menu state.
  *************************************************************************/
- document.getElementById("menuBtn")
-   .addEventListener("click", function (e) {
+ menuBtn.addEventListener("click", function (e) {
+    e.preventDefault();
     const sideMenu = document.getElementById("sideMenu");
     const sideMenuIcon = document.getElementById("menuBtnIcon");
     const sideMenuBtn = document.getElementById("menuBtn");
@@ -21,6 +21,8 @@
         //Open menu
         sideMenuBtn.setAttribute("aria-expanded","true");
         sideMenu.classList.add("sidemenu-open");
+        focusedMenuItem = 0;
+        menuItems[focusedMenuItem].focus();
     } else { //CLOSE MENU
         //Change menu icon
         sideMenuIcon.classList.remove("fa-times");
@@ -41,15 +43,13 @@
 *************************************************************************/
 function keyDownMenuBtnFocused(key) {
     if (key === "ArrowDown" || key === "ArrowUp" ||
-            key === "Space" || key === "Enter") {
-            menuBtn.click(); //open menu
-            if (key === "ArrowUp") { //Focus on last item
-                focusedMenuItem = menuItems.length-1;
-            } else { //Focus on first item
-                focusedMenuItem = 0;
-            }
+        key === "Space") {
+        menuBtn.click(); //open menu
+        if (key === "ArrowUp") { //Focus on last item
+            focusedMenuItem = menuItems.length-1;
             menuItems[focusedMenuItem].focus();
         }
+    }
 }
 
 /*************************************************************************

@@ -1,4 +1,11 @@
 /*************************************************************************
+ * File: modeActions.js
+ * This file contains functions that support the 
+ * apps' floating action buttons and action dialog buttons associated
+ * with each app mode.
+*************************************************************************/
+
+/*************************************************************************
  * @function Mode Floating Action Button CLICK handler 
  * @Desc 
  * When the user clicks on the action button in the current mode, we 
@@ -109,7 +116,7 @@ for (let i = 0; i < dialogCancelButtons.length; ++i) {
  *************************************************************************/
 function keyDownDialogFocused(e) {
     if (document.activeElement.classList
-        .   contains("action-button") && 
+        .contains("action-button") && 
         e.code === "Tab" && e.shiftKey) {
         //User is shift-tabbing from first focusable item in dialog. 
         //Prevent tab to URL bar by explicitly setting focus to 
