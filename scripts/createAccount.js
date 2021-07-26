@@ -83,12 +83,39 @@ function resetCreateAccountForm() {
     firstFocusableCreateAccountItem = acctEmailField;
 }
 
+/*************************************************************************
+ * @function accountCreatedClose CLICK Handler 
+ * @Desc 
+ * When the user clicks on the close button of the "Account Created"
+ * toast notification on the "Log In" page, close it.
+ * @global accountCreated: The "Account Created" toast
+ *************************************************************************/
+accountCreatedClose.addEventListener("click",function() {
+    accountCreated.classList.add("hidden");
+});
+
+/*************************************************************************
+ * @function createAccount 
+ * @desc 
+ * Given a JavaScript object containing a new account, create the account,
+ * return the user to the "Log In" page, and display a toast message
+ * indicating that a new account was created.
+ * For now, we display the account data in an alert box. Eventually,
+ * we will store the data to localStorage.
+ * @global loginPage: The "Log In" page
+ * @global createAccountDialog: The "Create Account" dialog
+ * @global accountCreatedEmail: The field in the toast notification where
+ *         we display the email of the new account.
+ * @global: accountCreated: The toast notification on the "Log In" page
+  *************************************************************************/
 function createAccount(newAcct) {
     resetCreateAccountForm();
     alert("New account created: " + JSON.stringify(newAcct));
     document.title = "Log In to SpeedScore";
     createAccountDialog.classList.add("hidden");
     loginPage.classList.remove("hidden");
+    accountCreatedEmail.textContent = newAcct.email;
+    accountCreated.classList.remove("hidden");
 }
 
 /*************************************************************************
@@ -136,8 +163,7 @@ function createAccount(newAcct) {
        createAccount({email: acctEmailField.value, 
                       password: acctPasswordField.value,
                       displayName: acctDisplayNameField.value,
-                      profilePic: (acctProfilePicImage.getAttribute("src").charAt(0) === "d" ? 
-                                    acctProfilePicImage.getAttribute("src") : ""),
+                      profilePic: acctProfilePicImage.getAttribute("src"),
                       securityQuestion: acctSecurityQuestionField.value,
                       securityAnswer: acctSecurityAnswerField.value
                     });
@@ -215,6 +241,10 @@ function createAccount(newAcct) {
  * that it is impossible to tab outside of the dialog box.
  * @global createAccountDialog: The "Create Account" dialog
  * @global loginPage: The Log In page
+ * @global firstFocusableCreateAccountItem: References the first focusable
+ *         item in "Create Account" dialog. 
+ * @global cancelCreateAccountBtn: The "Cancel" button (last focusable 
+ *         item in "Create Account" dialog)
  *************************************************************************/
 function keyDownCreateDialogFocused(e) {
     if (e.code === "Escape") {

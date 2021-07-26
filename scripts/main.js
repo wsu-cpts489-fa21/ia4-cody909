@@ -56,6 +56,9 @@ const loginBtnIcon = document.getElementById("loginBtnIcon");
 const loginBtn = document.getElementById("loginBtn");
 const createAccountBtn = document.getElementById("createAccountBtn");
 const resetPasswordBtn = document.getElementById("resetPasswordBtn");
+const accountCreated = document.getElementById("accountCreated");
+const accountCreatedClose = document.getElementById("accountCreatedClose");
+const accountCreatedEmail = document.getElementById("accountCreatedEmail")
 
 //Global variables to provide easy access to Create Account Dialog elements
 const createAccountDialog = document.getElementById("createAccountDialog");
