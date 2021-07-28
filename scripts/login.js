@@ -3,6 +3,26 @@
  * This file contains functions that support the log in page.
 *************************************************************************/
 
+/*************************************************************************
+ * @function validAccount
+ * @desc 
+ * Given an email and password entered into the "Log In" page, return true
+ * if the account exists in localStorage and the password matches, false 
+ * otherwise. 
+ * @param email: String entered into Email field of "Log In" form
+ * @param password: String entered into Password field of "Log In" form
+ *************************************************************************/
+function validAccount(email, password) {
+    let acct = localStorage.getItem(email);
+    if (acct === null) {
+        return false;
+    }
+    acct = JSON.parse(acct);
+    if (acct.password !== password) {
+        return false;
+    }
+    return true;
+}
 
 /*************************************************************************
  * @function resetLoginForm
@@ -19,6 +39,7 @@ function resetLoginForm() {
     errBox.classList.add("hidden");
     emailErr.classList.add("hidden");
     passwordErr.classList.add("hidden");
+    authErr.classList.add("hidden");
     emailField.value = "";
     passwordField.value = "";
 }
@@ -57,8 +78,7 @@ function login(userId) {
  * validity of the email and password fields, presenting accessible
  * error notifications if errors exist. If no errors exist, we
  * call the login() function, passing in the username of the user
- * @global loginForm: the <form> element whose 
- *         SUBMIT handler is triggered
+ * @global loginForm: the <form> element whose SUBMIT handler is triggered
  * @global emailField: The form's email field
  * @global passwordField: The form's password field
  * @global errBox: The <div> containing the error messages
@@ -73,27 +93,33 @@ loginForm.addEventListener("submit",function(e) {
    //Is the password field valid?
    let passwordValid = !passwordField.validity.patternMismatch && 
                        !passwordField.validity.valueMissing;
-   if (emailValid && passwordValid) { //All is well -- Exit
+   //Did the user specify valid account credentials?
+   let authenticated = emailValid && passwordValid && 
+                       validAccount(emailField.value, passwordField.value);
+   if (emailValid && passwordValid && authenticated) { //Log user in
       login(emailField.value);
       return;
    }
    //If here, at least one field is invalid
    errBox.classList.remove("hidden");
+   document.title = "Error: Log in to SpeedScore";
+   if (!passwordValid) { //Password field is invalid
+        passwordErr.classList.remove("hidden");
+        passwordErr.focus();
+    } else {
+        passwordErr.classList.add("hidden");
+    } 
    if (!emailValid) { //Email field is invalid
-       document.title = "Error: Log in to SpeedScore";
        emailErr.classList.remove("hidden");
        emailErr.focus();
    } else {
        emailErr.classList.add("hidden");
    }
-   if (!passwordValid) { //Password field is invalid
-       passwordErr.classList.remove("hidden");
-       if (emailValid) {
-            document.title = "Error: Log in to SpeedScore";
-            passwordErr.focus();
-       }
-   } else {
-       passwordErr.classList.add("hidden");
-   } 
+   if (emailValid && passwordValid) { //Authentication failed
+      authErr.classList.remove("hidden");
+      authErr.focus();
+    } else {
+        authErr.classList.add("hidden");
+    }
 });
 

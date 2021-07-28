@@ -52,6 +52,7 @@ const emailField = document.getElementById("email");
 const passwordField = document.getElementById("password");
 const emailErr = document.getElementById("emailError");
 const passwordErr = document.getElementById("passwordError");
+const authErr = document.getElementById("authError");
 const loginBtnIcon = document.getElementById("loginBtnIcon");
 const loginBtn = document.getElementById("loginBtn");
 const createAccountBtn = document.getElementById("createAccountBtn");

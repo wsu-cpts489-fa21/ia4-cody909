@@ -14,6 +14,7 @@
  * @global loginPage: The Log In page
  *************************************************************************/
 createAccountBtn.addEventListener("click",function(e) {
+    resetLoginForm();
     loginPage.classList.add("hidden");
     createAccountDialog.classList.remove("hidden");
     document.title = "Create Account";
