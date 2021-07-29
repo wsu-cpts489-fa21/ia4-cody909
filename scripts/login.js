@@ -60,13 +60,16 @@ function resetLoginForm() {
 function login(userId) {
     //1. Reset the login form in case user logs in again
     resetLoginForm();
-    //2. Reset state of app with user logged in.
+    //2. Place user acct data of logged in user in global JS object
+    userData = JSON.parse(localStorage.getItem(userId));
+    //3. Reset state of app with user logged in.
     loginPage.classList.add("hidden");
     modeTabsContainer.classList.remove("hidden");
     modeTabPanels[currentMode].classList.remove("hidden");
     menuBtn.classList.remove("hidden");
     sideMenu.classList.remove("hidden");
     searchBtn.classList.remove("hidden");
+    profileBtn.style.backgroundImage = "url(" + userData.profilePic + ")";	
     profileBtn.classList.remove("hidden");
     document.title = "SpeedScore: Activity Feed";
 }

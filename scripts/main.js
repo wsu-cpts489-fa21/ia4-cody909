@@ -5,6 +5,10 @@
  * general-purpose functions that are not associated with any particular
  * area of the app.
  ************************************************************************/
+//Global variable containing data object of user currently logged in
+//object has these fields: email, password, displayName, profilePic,
+//securityQuestion, securityAnswer
+let userData = {}; //set upon login
 
 //Global variables to help manage the menu */
 let focusedMenuItem = 0; //Array index of the menu item with focus
