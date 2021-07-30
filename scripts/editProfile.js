@@ -5,6 +5,7 @@
  ************************************************************************/
 
 
+
 /*************************************************************************
  * @function profileBtn CLICK Handler 
  * @Desc 
@@ -18,11 +19,7 @@
  *         dialog
  *************************************************************************/
  profileBtn.addEventListener("click", function(e) {
-    modeTabsContainer.classList.add("hidden");
-    menuBtn.classList.add("hidden");
-    searchBtn.classList.add("hidden");
-    profileBtn.classList.add("hidden");
-    modeTabPanels[currentMode].classList.add("hidden");
+    prepareForDialog();
     document.title = "Edit Account and Profile";
     profileSettingsDialog.classList.remove("hidden");
     profileEmailField.focus();

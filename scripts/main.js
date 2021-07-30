@@ -91,3 +91,26 @@ const profileEmailField = document.getElementById("profileEmail");
 
 //Default profile picture
 defaultProfilePic = "../images/DefaultProfilePic.jpg";
+
+/*************************************************************************
+ * @function prepareForDialog
+ * @Desc 
+ * This function prepares the UI prior to opening a dialog box. It hides
+ * the skip link, banner bar buttons, mode tabs, and current tab panel,
+ * so that they are unavailable while the user interacdts with the dialog.
+ * Note: This function is placed in main.js because it is useful to 
+ * multiple UI components.
+ * @global skipLink: The skip link
+ * @global menuBtn: The menu button
+ * @global modeTabsContainer: The mode tabs
+ * @global modeTabPanels: array of tab panels 
+ * @global currentMode, index of current mode.
+ *************************************************************************/
+ function prepareForDialog() {
+  skipLink.classList.add("hidden"); 
+  menuBtn.classList.add("hidden");
+  searchBtn.classList.add("hidden");
+  profileBtn.classList.add("hidden");
+  modeTabsContainer.classList.add("hidden");
+  modeTabPanels[currentMode].classList.add("hidden");
+}
