@@ -85,5 +85,9 @@ const acctDisplayNameErr = document.getElementById("acctDisplayNameError");
 const acctSecurityQuestionErr = document.getElementById("acctSecurityQuestionError");
 const acctSecurityAnswerErr = document.getElementById("acctSecurityAnswerError");
 
+//Global variables to provide easy access to Create Account Dialog elements
+const profileSettingsDialog = document.getElementById("profileSettingsDialog");
+const profileEmailField = document.getElementById("profileEmail");
+
 //Default profile picture
 defaultProfilePic = "../images/DefaultProfilePic.jpg";
