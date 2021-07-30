@@ -110,11 +110,32 @@ accountCreatedClose.addEventListener("click",function() {
  *         we display the email of the new account.
  * @global: accountCreated: The toast notification on the "Log In" page
   *************************************************************************/
-function createAccount(newAcct) {
+function createAccount() {
+    //Build account object from form data
+    const newAcct = {
+        accountInfo: {
+            email: acctEmailField.value, 
+            password: acctPasswordField.value,
+            securityQuestion: acctSecurityQuestionField.value,
+            securityAnswer: acctSecurityAnswerField.value
+        },
+        identityInfo: {
+            displayName: acctDisplayNameField.value,
+            profilePic: acctProfilePicImage.getAttribute("src"),
+        },
+        speedgolfInfo: {
+            bio: "",
+            firstRound: "",
+            personalBest: {strokes: "",minutes: "", seconds: "", course: ""},
+            clubs: {}
+        }
+    };
     //Save account to localStorage as key-value pair
-    localStorage.setItem(newAcct.email, 
+    localStorage.setItem(newAcct.accountInfo.email, 
         JSON.stringify(newAcct));
+    //Reset form in case it is visited again
     resetCreateAccountForm();
+    //Transition to "Log In" page
     document.title = "Log In to SpeedScore";
     createAccountDialog.classList.add("hidden");
     loginPage.classList.remove("hidden");
@@ -164,14 +185,7 @@ function createAccount(newAcct) {
     if (emailValid && passwordValid && repeatPasswordValid &&
         displayNameValid && securityQuestionValid & securityAnswerValid) { 
         //All is well -- Call createAccount()
-        createAccount(
-            {email: acctEmailField.value, 
-            password: acctPasswordField.value,
-            displayName: acctDisplayNameField.value,
-            profilePic: acctProfilePicImage.getAttribute("src"),
-            securityQuestion: acctSecurityQuestionField.value,
-            securityAnswer: acctSecurityAnswerField.value
-            });
+        createAccount();
        return;
     }
     //If here, at least one field is invalid: Display the errors

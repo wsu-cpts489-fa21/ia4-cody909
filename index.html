@@ -433,10 +433,10 @@
                 <label for="profileSecurityAnswer" class="form-label">Answer to Security Question:
                     <input id="profileSecurityAnswer" type="text" class="form-control centered"
                     minlength="5"
-                    aria-describedby="acctSecurityAnswerDescr"
+                    aria-describedby="profileSecurityAnswerDescr"
                     required>
                 </label>
-                <div id="acctSecurityAnswerDescr" class="form-text">
+                <div id="profileSecurityAnswerDescr" class="form-text">
                   Your security answer must be at least 5 characters and should be something you easily associate
                   your security question. You will have to provide this answer if you ever need to reset your password.
                 </div>
@@ -509,10 +509,10 @@
                   </div>
                 </div>
                 <div class="mb-3">
-                  <label for="sgFirstYear" class="form-label">Date of First Speedgolf Round (optional):</label>
-                    <input type="month" id="sgFirstYear" class="form-control centered"
-                      value="2021-07" aria-describedby="sgFirstYearDescr" required>
-                  <div id="sgFirstYearDescr" class="form-text">
+                  <label for="sgFirstRound" class="form-label">Date of First Speedgolf Round (optional):</label>
+                    <input type="month" id="sgFirstRound" class="form-control centered"
+                      value="2021-07" aria-describedby="sgFirstRoundDescr">
+                  <div id="sgFirstRoundDescr" class="form-text">
                     Month and year in which you played your first speedgolf round.
                   </div>
                 </div>
@@ -530,19 +530,16 @@
                     <label for="sgBestStrokes" class="form-label">Strokes:
                         <input id="sgBestStrokes" type="number" class="form-control centered"
                         min="36" max="200"
-                        value="80"
                         aria-describedby="sgBestScoreDescr">
                     </label>
                     <label for="sgBestMinutes" class="form-label">Minutes:
                       <input id="sgBestMinutes" type="number" class="form-control centered"
                       min="36" max="200"
-                      value="60"
                       aria-describedby="sgBestScoreDescr">
                     </label>
                     <label for="sgBestSeconds" class="form-label">Seconds:
                       <input id="sgBestSeconds" type="number" class="form-control centered"
                       min="0" max="59"
-                      value="00"
                       aria-describedby="sgBestScoreDescr">
                     </label>
                     <div id="sgBestScoreDescr" class="form-text">
@@ -561,7 +558,7 @@
                 </fieldset>
                 <fieldset>
                   <legend class="fm-legend-sm">Clubs in Bag (optional)</legend>
-                  <div class="mb-3">
+                  <div id="clubsDiv" class="mb-3">
                     <input id="sg1W" type="checkbox" name="Driver"
                     aria-describedby="sgClubsDescr">
                     <label for="sg1W">Driver</label>

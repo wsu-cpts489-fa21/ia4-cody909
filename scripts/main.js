@@ -88,7 +88,20 @@ const acctSecurityAnswerErr = document.getElementById("acctSecurityAnswerError")
 //Global variables to provide easy access to Create Account Dialog elements
 const profileSettingsDialog = document.getElementById("profileSettingsDialog");
 const profileEmailField = document.getElementById("profileEmail");
-
+const profilePasswordField = document.getElementById("profilePassword");
+const profileSecurityQuestionField = document.getElementById("profileSecurityQuestion");
+const profileSecurityAnswerField = document.getElementById("profileSecurityAnswer");
+const profileDisplayNameField = document.getElementById("profileDisplayName");
+const profilePicField = document.getElementById("profilePic");
+const profilePicImageField = document.getElementById("profilePicImage");
+const profileBioField = document.getElementById("sgBio");
+const profileFirstRoundField = document.getElementById("sgFirstRound");
+const profileHomeCourseField = document.getElementById("sgHomeCourse");
+const profileBestStrokesField = document.getElementById("sgBestStrokes");
+const profileBestMinutesField = document.getElementById("sgBestMinutes");
+const profileBestSecondsField = document.getElementById("sgBestSeconds");
+const profileBestCourseField = document.getElementById("sgBestCourse");
+const clubsInBagChecks = document.getElementById("clubsDiv").querySelectorAll("input");
 //Default profile picture
 defaultProfilePic = "../images/DefaultProfilePic.jpg";
 

@@ -18,7 +18,7 @@ function validAccount(email, password) {
         return false;
     }
     acct = JSON.parse(acct);
-    if (acct.password !== password) {
+    if (acct.accountInfo.password !== password) {
         return false;
     }
     return true;
@@ -69,7 +69,7 @@ function login(userId) {
     menuBtn.classList.remove("hidden");
     sideMenu.classList.remove("hidden");
     searchBtn.classList.remove("hidden");
-    profileBtn.style.backgroundImage = "url(" + userData.profilePic + ")";	
+    profileBtn.style.backgroundImage = "url(" + userData.identityInfo.profilePic + ")";	
     profileBtn.classList.remove("hidden");
     document.title = "SpeedScore: Activity Feed";
 }
