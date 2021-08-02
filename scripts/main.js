@@ -24,6 +24,9 @@ const modeTabButtons =
 //Array of mode tab panel elements:
 const modeTabPanels = 
   document.querySelectorAll("div[role='tabpanel']");
+//Array mapping current mode to its name, so that
+//we can set document.title appropriately
+modeNames=["Activity Feed", "Rounds","Courses","Buddies"];
 
 //Global variables to help manage the floating
 //action butons and their corresponding dialog boxes
@@ -85,8 +88,9 @@ const acctDisplayNameErr = document.getElementById("acctDisplayNameError");
 const acctSecurityQuestionErr = document.getElementById("acctSecurityQuestionError");
 const acctSecurityAnswerErr = document.getElementById("acctSecurityAnswerError");
 
-//Global variables to provide easy access to Create Account Dialog elements
+//Global variables to provide easy access to Edit Profile Dialog elements
 const profileSettingsDialog = document.getElementById("profileSettingsDialog");
+const editProfileForm = document.getElementById("editProfileForm")
 const profileEmailField = document.getElementById("profileEmail");
 const profilePasswordField = document.getElementById("profilePassword");
 const profileSecurityQuestionField = document.getElementById("profileSecurityQuestion");
@@ -106,11 +110,11 @@ const clubsInBagChecks = document.getElementById("clubsDiv").querySelectorAll("i
 defaultProfilePic = "../images/DefaultProfilePic.jpg";
 
 /*************************************************************************
- * @function prepareForDialog
+ * @function transitionToDialog
  * @Desc 
  * This function prepares the UI prior to opening a dialog box. It hides
  * the skip link, banner bar buttons, mode tabs, and current tab panel,
- * so that they are unavailable while the user interacdts with the dialog.
+ * so that they are unavailable while the user interacts with the dialog.
  * Note: This function is placed in main.js because it is useful to 
  * multiple UI components.
  * @global skipLink: The skip link
@@ -119,11 +123,33 @@ defaultProfilePic = "../images/DefaultProfilePic.jpg";
  * @global modeTabPanels: array of tab panels 
  * @global currentMode, index of current mode.
  *************************************************************************/
- function prepareForDialog() {
+ function transitionToDialog() {
   skipLink.classList.add("hidden"); 
   menuBtn.classList.add("hidden");
   searchBtn.classList.add("hidden");
   profileBtn.classList.add("hidden");
   modeTabsContainer.classList.add("hidden");
   modeTabPanels[currentMode].classList.add("hidden");
+}
+
+/*************************************************************************
+ * @function transitionFromDialog
+ * @Desc 
+ * This function restores the UI after closing a dialog box. It shows
+ * the skip link, banner bar buttons, mode tabs, and current tab panel,
+ * Note: This function is placed in main.js because it is useful to 
+ * multiple UI components.
+ * @global skipLink: The skip link
+ * @global menuBtn: The menu button
+ * @global modeTabsContainer: The mode tabs
+ * @global modeTabPanels: array of tab panels 
+ * @global currentMode, index of current mode.
+ *************************************************************************/
+ function transitionFromDialog() {
+  skipLink.classList.remove("hidden"); 
+  menuBtn.classList.remove("hidden");
+  searchBtn.classList.remove("hidden");
+  profileBtn.classList.remove("hidden");
+  modeTabsContainer.classList.remove("hidden");
+  modeTabPanels[currentMode].classList.remove("hidden");
 }
