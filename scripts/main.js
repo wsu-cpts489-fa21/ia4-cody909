@@ -90,7 +90,18 @@ const acctSecurityAnswerErr = document.getElementById("acctSecurityAnswerError")
 
 //Global variables to provide easy access to Edit Profile Dialog elements
 const profileSettingsDialog = document.getElementById("profileSettingsDialog");
-const editProfileForm = document.getElementById("editProfileForm")
+const accountSettingsBtn = document.getElementById("accountSettingsBtn");
+const accountSettingsPanel = document.getElementById("accountSettingsPanel");
+const profileSettignsBtn = document.getElementById("profileSettingsBtn");
+const profileSettingsPanel = document.getElementById("profileSettingsPanel");
+const sgSettingsBtn = document.getElementById("sgSettingsBtn");
+const sgSettingsPanel = document.getElementById("sgSettingsPanel");
+const editProfileForm = document.getElementById("editProfileForm");
+const profileErrBox = document.getElementById("profileErrorBox");
+const profileEmailErr = document.getElementById("profileEmailError");
+const profileDisplayNameErr = document.getElementById("profileDisplayNameError");
+const profileSecurityQuestionErr = document.getElementById("profileSecurityQuestionError");
+const profileSecurityAnswerErr = document.getElementById("profileSecurityAnswerError");
 const profileEmailField = document.getElementById("profileEmail");
 const profilePasswordField = document.getElementById("profilePassword");
 const profileSecurityQuestionField = document.getElementById("profileSecurityQuestion");
@@ -105,36 +116,47 @@ const profileBestStrokesField = document.getElementById("sgBestStrokes");
 const profileBestMinutesField = document.getElementById("sgBestMinutes");
 const profileBestSecondsField = document.getElementById("sgBestSeconds");
 const profileBestCourseField = document.getElementById("sgBestCourse");
-const clubsInBagChecks = document.getElementById("clubsDiv").querySelectorAll("input");
+const allClubs = ["Driver","3W","4W","5W","Hybrid","1I","2I","3I","4I","5I","6I","7I","8I","9I","PW","GW","SW","LW","Putter"];
+const profileClubsInBagChecks = document.getElementById("clubsDiv").querySelectorAll("input");
+const profileClubCommentsField = document.getElementById("sgClubComments");
+const cancelUpdateProfileBtn = document.getElementById("cancelUpdateProfileBtn");
 //Default profile picture
 defaultProfilePic = "../images/DefaultProfilePic.jpg";
 
 /*************************************************************************
  * @function transitionToDialog
- * @Desc 
+ * @desc 
  * This function prepares the UI prior to opening a dialog box. It hides
  * the skip link, banner bar buttons, mode tabs, and current tab panel,
  * so that they are unavailable while the user interacts with the dialog.
+ * It then displays the dialog box and dialog box title.
  * Note: This function is placed in main.js because it is useful to 
  * multiple UI components.
+ * @param dialogTitle: The title of the dialog to which to set 
+ * document.title
+ * @param dialog: A reference to the HTML element containing the dialog;
+ * it will be shown by removing the "hidden" class 
  * @global skipLink: The skip link
  * @global menuBtn: The menu button
  * @global modeTabsContainer: The mode tabs
  * @global modeTabPanels: array of tab panels 
  * @global currentMode, index of current mode.
  *************************************************************************/
- function transitionToDialog() {
+ function transitionToDialog(dialog, dialogTitle) {
   skipLink.classList.add("hidden"); 
   menuBtn.classList.add("hidden");
   searchBtn.classList.add("hidden");
   profileBtn.classList.add("hidden");
   modeTabsContainer.classList.add("hidden");
   modeTabPanels[currentMode].classList.add("hidden");
+  document.title = dialogTitle;
+  dialog.classList.remove("hidden");
 }
 
 /*************************************************************************
  * @function transitionFromDialog
- * @Desc 
+ * @param dialogToClose -- a reference to the HML dialog element to close
+ * @desc 
  * This function restores the UI after closing a dialog box. It shows
  * the skip link, banner bar buttons, mode tabs, and current tab panel,
  * Note: This function is placed in main.js because it is useful to 
@@ -145,11 +167,13 @@ defaultProfilePic = "../images/DefaultProfilePic.jpg";
  * @global modeTabPanels: array of tab panels 
  * @global currentMode, index of current mode.
  *************************************************************************/
- function transitionFromDialog() {
+ function transitionFromDialog(dialogToClose) {
   skipLink.classList.remove("hidden"); 
   menuBtn.classList.remove("hidden");
   searchBtn.classList.remove("hidden");
   profileBtn.classList.remove("hidden");
   modeTabsContainer.classList.remove("hidden");
   modeTabPanels[currentMode].classList.remove("hidden");
+  document.title = "SpeedScore: " + modeNames[currentMode];
+  dialogToClose.classList.add("hidden");
 }

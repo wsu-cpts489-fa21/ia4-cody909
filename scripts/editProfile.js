@@ -6,12 +6,37 @@
 
  let firstFocusableUpdateProfileItem = profileEmailField;
 
+ /*************************************************************************
+ * @function profilePicField CHANGE Handler 
+ * @Desc 
+ * When the user finishes interacting with the File picker dialog box,
+ * update the user's profile picture based on the selection from the
+ * file picker. If the user cancels out of the File Picker, the input
+ * element's value will be empty and we set the profile picture to the
+ * default picture.
+ * @global profilePicField: The "Update Profile" form field 
+ *         containing the optional profile picture
+ * @global profilePicImage: The "Update Profile" <img> element that
+ *         displays the user's profile picture (possibly the default)
+ *************************************************************************/
+profilePicField.addEventListener("change",function(e) {
+    if (profilePicField.value.length !== 0) {
+        const reader = new FileReader();
+        reader.readAsDataURL(profilePicField.files[0]);
+        reader.addEventListener("load",function() {
+            profilePicImage.setAttribute("src",this.result);
+        });
+    } else {
+        profilePicImage.setAttribute("src",defaultProfilePic);
+    }
+});
+
 /*************************************************************************
  * @function resetupdateProfileForm 
  * @Desc 
- * When the user exits the "Create Account" Dialog, reset the form to
- * show blank acctEmailField: Form's email field
- * @global data in case the form is visited again.
+ * When the user exits the "Update Profile" Dialog, reset the form to
+ * blank in case the form is visited again.
+ * @global profileEmailFiled: Form's email field
  * @global profilePasswordField: Form's password field
  * @global profileDisplayNameField: Form's display name field
  * @global profileSecurityQuestionField: Form's security q field
@@ -24,19 +49,42 @@
  * @global profileSecurityAnswerErr: Error message for security answ field
  *************************************************************************/
  function resetUpdateProfileForm() {
-    profileEmailField.value = "";
-    profilePasswordField.value = "";
-    profileDisplayNameField.value = "";
-    profilePicField.value = "";
-    profilePicImage.setAttribute("src",defaultProfilePic);
-    profileSecurityQuestionField.value = "";
+    //Hide errors
     profileErrBox.classList.add("hidden");
-    profileSecurityAnswerField.value = "";
     profileEmailErr.classList.add("hidden");
     profileDisplayNameErr.classList.add("hidden");
     profileSecurityQuestionErr.classList.add("hidden");
     profileSecurityAnswerErr.classList.add("hidden");
+    //Blank out account info
+    profileEmailField.value = "";
+    profilePasswordField.value = "";
+    profileSecurityQuestionField.value = "";
+    profileSecurityAnswerField.value = "";
+    //Blank out Identity info
+    profileDisplayNameField.value = "";
+    profilePicField.value = "";
+    profilePicImage.setAttribute("src",defaultProfilePic);
+    //Blank out Speedgolf info
+    profileBioField.value = "";
+    profileFirstRoundField.value = "";
+    profileHomeCourseField.value = "";
+    profileBestStrokesField.value = "";
+    profileBestMinutesField.value = "";
+    profileBestSecondsField.value = "";
+    profileBestCourseField.value = "";
+    for (let i = 0; i < allClubs.length; ++i) {
+        document.getElementById("sg"+ allClubs[i]).checked = false;
+    }
+    profileClubCommentsField.value = "";
+    //Set first focusable item.
     firstFocusableUpdateProfileItem = profileEmailField;
+    //Expand only the first accordion panel
+    accountSettingsBtn.classList.remove("collapsed");
+    accountSettingsPanel.classList.add("show");
+    profileSettingsBtn.classList.add("collapsed");
+    profileSettingsPanel.classList.remove("show");
+    sgSettingsBtn.classList.add("collapsed");
+    sgSettingsPanel.classList.remove("show");
 }
 
 /*************************************************************************
@@ -65,14 +113,18 @@ function populateProfileSettingsForm() {
     profileDisplayNameField.value = userData.identityInfo.displayName;
     profilePicImage.setAttribute("src",userData.identityInfo.profilePic);
     profileBioField.value = userData.speedgolfInfo.bio;
+    profileHomeCourseField.value = userData.speedgolfInfo.homeCourse;
     profileFirstRoundField.value = userData.speedgolfInfo.firstRound;
     profileBestStrokesField.value = userData.speedgolfInfo.personalBest.strokes;
     profileBestMinutesField.value = userData.speedgolfInfo.personalBest.minutes;
     profileBestSecondsField.value = userData.speedgolfInfo.personalBest.seconds;
-    profileBestCourseField.value = userData.speedgolfInfo.personalBest.course;
+    profileBestCourseField.value = userData.speedgolfInfo.personalBest.course;   
+    //Populate checks...
     for (const prop in userData.speedgolfInfo.clubs) {
         document.getElementById("sg" + prop).checked = true;
     }
+    profileClubCommentsField.value = userData.speedgolfInfo.clubComments;
+    profileEmailField.focus(); //Set focus to first field.
 }
 
 /*************************************************************************
@@ -88,10 +140,8 @@ function populateProfileSettingsForm() {
  *         dialog
  *************************************************************************/
  profileBtn.addEventListener("click", function(e) {
-    transitionToDialog();
-    document.title = "Edit Account and Profile";
+    transitionToDialog(profileSettingsDialog, "Edit Account and Profile");
     populateProfileSettingsForm();
-    profileSettingsDialog.classList.remove("hidden");
     profileEmailField.focus();
 });
 
@@ -110,12 +160,13 @@ function populateProfileSettingsForm() {
  *************************************************************************/
 function updateProfile() {
     let clubsInBag = {};
-    for (let i = 0; i < clubsInBagChecks.length; ++i) {
-        if (clubsInBagChecks[i].checked) {
-            clubsInBag[clubsInBagchecks[i].name] = true;
+    for (let i = 0; i < profileClubsInBagChecks.length; ++i) {
+        if (profileClubsInBagChecks[i].checked) {
+            clubsInBag[profileClubsInBagChecks[i].name] = true;
         }
     }
-    const updatedProfile = {
+    oldUserEmail = userData.accountInfo.email;
+    userData = {
         accountInfo: {
             email: profileEmailField.value, 
             password: profilePasswordField.value,
@@ -129,24 +180,28 @@ function updateProfile() {
         speedgolfInfo: {
             bio: profileBioField.value,
             firstRound: profileFirstRoundField.value,
+            homeCourse: profileHomeCourseField.value,
             personalBest: {
                 strokes: profileBestStrokesField.value,
                 minutes: profileBestMinutesField.value, 
                 seconds: profileBestSecondsField.value, 
-                course: profileBestCourseField},
-            clubs: clubsInBag
+                course: profileBestCourseField.value},
+            clubs: clubsInBag,
+            clubComments: profileClubCommentsField.value
         }
     };
     //Save updated profile to localStorage as key-value pair
-    localStorage.setItem(updatedProfile.accountInfo.email, 
-        JSON.stringify(updatedProfile));
+    localStorage.setItem(userData.accountInfo.email, 
+        JSON.stringify(userData));
+    if (oldUserEmail !== userData.accountInfo.email) {
+        //We need to remove old user record from localStorage
+        localStorage.removeItem(oldUserEmail);
+    }
     //Reset form in case it is visited again
     resetUpdateProfileForm();
     //Transition back to previous mode page
-    transitionFromDialog();
-    document.title = "SpeedScore: " + modeNames[currentMode];
-    createAccountDialog.classList.add("hidden");
-    profileSettingsDialog.classList.add("hidden");
+    profileBtn.style.backgroundImage = "url(" + userData.identityInfo.profilePic + ")";	
+    transitionFromDialog(profileSettingsDialog);
 }
 
 /*************************************************************************
@@ -162,29 +217,50 @@ function updateProfile() {
  * @global profileSettingsDialog: The "Account and Profile Settings" 
  *         dialog
  *************************************************************************/
- editProfileForm.addEventListener("submit",function() {
+editProfileForm.addEventListener("submit",function(e) {
     e.preventDefault(); //Prevent default submit behavior
     //Is the email field valid?
     let emailValid = !profileEmailField.validity.typeMismatch && 
-                     !profileEmailField.validity.valueMissing;
+                        !profileEmailField.validity.valueMissing;
     //Is display field valid?
     let displayNameValid = !profileDisplayNameField.validity.tooShort &&
-                           !profileDisplayNameField.validity.valueMissing;
+                            !profileDisplayNameField.validity.valueMissing;
     //Is security question field valid?
     let securityQuestionValid = !profileSecurityQuestionField.validity.tooShort &&
                                 !profileSecurityQuestionField.validity.valueMissing;
     //Is security answer field valid?
     let securityAnswerValid = !profileSecurityAnswerField.validity.tooShort &&
-                              !profileSecurityAnswerField.validity.valueMissing;
+                                !profileSecurityAnswerField.validity.valueMissing;
     if (emailValid && displayNameValid && 
         securityQuestionValid & securityAnswerValid) { 
         //All is well -- Call updateAccount()
         updateProfile();
-       return;
+        return;
     }
     //If here, at least one field is invalid: Display the errors
     //and allow user to fix them.
     profileErrBox.classList.remove("hidden");
+    if (!emailValid || !securityQuestionValid || !securityAnswerValid) {
+        //expand account panel
+        accountSettingsBtn.classList.remove("collapsed");
+        accountSettingsPanel.classList.add("show");
+    } else {
+        //collapse account panel
+        accountSettingsBtn.classList.add("collapsed");
+        accountSettingsPanel.classList.remove("show");
+    }
+    if (!displayNameValid) {
+        //expand profile panel
+        profileSettingsBtn.classList.remove("collapsed");
+        profileSettingsPanel.classList.add("show");
+    } else {
+        //collapse account panel
+        profileSettingsBtn.classList.add("collapsed");
+        profileSettingsPanel.classList.remove("show");
+    }
+    //Speedgolf Settings Panel always collapsed
+    sgSettingsBtn.classList.add("collapsed");
+    sgSettingsPanel.classList.remove("show");
     document.title = "Error: Update Account & Profile";
     if (!securityAnswerValid) { //Display name field is invalid
         profileSecurityAnswerErr.classList.remove("hidden");
@@ -210,8 +286,47 @@ function updateProfile() {
     if (!emailValid) { //Email field is invalid
         profileEmailErr.classList.remove("hidden");
         profileEmailErr.focus();
-        firstFocusableCreateAccountItem = profileEmailErr;
+        firstFocusableUpdateProfileItem = profileEmailErr;
     } else {
         profileEmailErr.classList.add("hidden");
     }
  });
+
+ cancelUpdateProfileBtn.addEventListener("click", function() {
+    resetUpdateProfileForm();
+    transitionFromDialog(profileSettingsDialog); 
+ });
+
+ /*************************************************************************
+ * @function keyDownUpdateDialogFocused 
+ * @desc 
+ * When the user presses a key with an element in the "Account & Profile" 
+ * dialog focused, we implement the accessible keyboard interface for
+ * a modal dialog box. This means that "Escape" dismisses the dialog and
+ * that it is impossible to tab outside of the dialog box.
+ * @global profileSettingsDialog: The "Account & Profile" dialog
+ * @global firstUpdateProfileItem: References the first focusable
+ *         item in "Account & Profile" dialog. 
+ * @global cancelUpdateProfiletBtn: The "Cancel" button (last focusable 
+ *         item in "Account & Profile" dialog)
+ *************************************************************************/
+function keyDownUpdateDialogFocused(e) {
+    if (e.code === "Escape") {
+        cancelUpdateProfileBtn.click();
+        return;
+    }
+    if (e.code === "Tab" && document.activeElement == firstFocusableUpdateProfileItem &&
+       e.shiftKey) {
+        //shift focus to last focusable item in dialog
+        cancelUpdateProfileBtn.focus();
+        e.preventDefault();
+        return;
+    }
+    if (e.code === "Tab" && document.activeElement == cancelUpdateProfileBtn &&
+        !e.shiftKey) {
+        //shift focus to first focusable item in dialog
+        firstFocusableUpdateProfileItem.focus();
+        e.preventDefault()
+        return;
+    }
+}

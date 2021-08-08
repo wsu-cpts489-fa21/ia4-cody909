@@ -376,25 +376,27 @@
       aria-labelledby="profileSettingsHeader">
     <h1 id="createAccountHeader" class="mode-page-header">Account & Profile</h1>
     <p id="profileErrorBox" class="alert alert-danger centered hidden">
-      <a id="profileEmailError" href="#acctEmail" class="alert-link">Enter a valid email address<br/></a>
-      <a id="profileDisplayNameError" href="#acctDisplayName" class="alert-link">Enter a valid display name<br/></a>
-      <a id="profileSecurityQuestionError" href="#acctSecurityQuestion" class="alert-link">Enter a valid security question<br/></a>
-      <a id="profileSecurityAnswerError" href="#acctSecurityAnswer" class="alert-link">Enter a valid security question answer</a>
+      <a id="profileEmailError" href="#profileEmail" class="alert-link">Enter a valid email address<br/></a>
+      <a id="profileDisplayNameError" href="#profileDisplayName" class="alert-link">Enter a valid display name<br/></a>
+      <a id="profileSecurityQuestionError" href="#profileSecurityQuestion" class="alert-link">Enter a valid security question<br/></a>
+      <a id="profileSecurityAnswerError" href="#profileSecurityAnswer" class="alert-link">Enter a valid security question answer</a>
     </p>
     <form id="editProfileForm" class="centered" novalidate>
       <div id="profileFormAccordion" class="accordion">
         <div class="accordion-item">
           <fieldset>
             <h2 class="accordion-header" id="accountHeader">
-              <button class="accordion-button" type="button"
+              <button id="accountSettingsBtn" class="accordion-button" type="button"
                 data-bs-toggle="collapse" data-bs-target="#accountSettingsPanel" 
                 aria-expanded="true" 
                 aria-controls="accountSettingsPanel">
                 <legend>Account</legend>
               </button>
             </h2>
-            <div id="accountSettingsPanel" class="accordion-collapse collapse show" 
-                aria-labelledby="accountHeader" data-bs-parent="#profileFormAccordion">
+            <div id="accountSettingsPanel" 
+                class="accordion-collapse collapse show" 
+                aria-labelledby="accountHeader" 
+                data-bs-parent="#profileFormAccordion">
               <div class="accordion-body">
               <div class="mb-3">
                 <label for="profileEmail" class="form-label">Email:
@@ -448,7 +450,7 @@
         <div class="accordion-item">
           <fieldset>
             <h2 id="profileHeader" class="accordion-header">
-              <button class="accordion-button collapsed" type="button"
+              <button id="profileSettingsBtn" class="accordion-button collapsed" type="button"
                 data-bs-toggle="collapse" data-bs-target="#profileSettingsPanel" 
                 aria-expanded="false" 
                 aria-controls="profileSettingsPanel">
@@ -456,7 +458,7 @@
               </button>
             </h2>
             <div id="profileSettingsPanel" class="accordion-collapse collapse"
-              aria-labelledby="profileHeader" data-bs-parent="#editProfileAccordion">
+              aria-labelledby="profileHeader" data-bs-parent="#profileFormAccordion">
               <div class="accordion-body">
               <div class="mb-3">
                 <label for="profileDisplayName" class="form-label">Display Name:<br/>
@@ -489,7 +491,7 @@
         <div class="accordion-item">
           <fieldset>
             <h2 id="sgHeader" class=accordion-header>
-              <button class="accordion-button collapsed" type="button"
+              <button id="sgSettingsBtn" class="accordion-button collapsed" type="button"
                 data-bs-toggle="collapse" data-bs-target="#sgSettingsPanel" 
                 aria-expanded="false" 
                 aria-controls="sgSettingsPanel">
@@ -497,7 +499,7 @@
               </button>
             </h2>
             <div id="sgSettingsPanel" class="accordion-collapse collapse"
-                aria-labelledby="sgHeader" data-bs-parent="#editProfileAccordion">
+                aria-labelledby="sgHeader" data-bs-parent="#profileFormAccordion">
               <div class="accordion-body">
                 <div class="mb-3">
                   <label for="sgBio" class="form-label">Personal Speedgolf Bio (optional):</label>
@@ -559,9 +561,9 @@
                 <fieldset>
                   <legend class="fm-legend-sm">Clubs in Bag (optional)</legend>
                   <div id="clubsDiv" class="mb-3">
-                    <input id="sg1W" type="checkbox" name="Driver"
+                    <input id="sgDriver" type="checkbox" name="Driver"
                     aria-describedby="sgClubsDescr">
-                    <label for="sg1W">Driver</label>
+                    <label for="sgDriver">Driver</label>
                     <input id="sg3W" type="checkbox" name="3W"
                     aria-describedby="sgClubsDescr">
                     <label for="sg3W">3W</label>
@@ -622,8 +624,8 @@
                     <div id="sgClubsDescr" class="form-text">
                       Select the clubs you normally carry during a speedgolf round. 
                     </div>
-                    <label for="sgClubsComments" class="form-label">Comments on Clubs (optional):</label>
-                    <textarea id="sgClubsComments" class="form-control"
+                    <label for="sgClubComments" class="form-label">Comments on Clubs (optional):</label>
+                    <textarea id="sgClubComments" class="form-control"
                       aria-describedby="sgClubCommentsDescr"></textarea>
                     <div id="sgClubCommentsDescr" class="form-text">
                       Describe your clubs in greater detail. 

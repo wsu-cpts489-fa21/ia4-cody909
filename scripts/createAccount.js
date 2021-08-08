@@ -125,9 +125,11 @@ function createAccount() {
         },
         speedgolfInfo: {
             bio: "",
+            homeCourse: "",
             firstRound: "",
             personalBest: {strokes: "",minutes: "", seconds: "", course: ""},
-            clubs: {}
+            clubs: {},
+            clubComments: ""
         }
     };
     //Save account to localStorage as key-value pair
