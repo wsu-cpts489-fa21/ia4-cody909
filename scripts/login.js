@@ -109,7 +109,7 @@ loginForm.addEventListener("submit",function(e) {
    //Did the user specify valid account credentials?
    let authenticated = emailValid && passwordValid && 
                        validAccount(emailField.value, passwordField.value);
-   if (emailValid && passwordValid && authenticated) { //Log user in
+   if (authenticated) { //Log user in
       login(emailField.value);
       return;
    }
