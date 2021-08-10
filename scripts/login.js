@@ -42,6 +42,9 @@ function resetLoginForm() {
     authErr.classList.add("hidden");
     emailField.value = "";
     passwordField.value = "";
+    loginBtnIcon.classList.remove("fa-spinner", "fa-spin");
+    loginBtnIcon.classList.add("fa-sign-in-alt");
+    loginBtn.setAttribute("aria-busy","false");
 }
 
 /*************************************************************************
@@ -57,7 +60,7 @@ function resetLoginForm() {
  * @global searchBtn: The search button in the top banner bar
  * @global profileBtn: The profile picture button in the top banner bar
  *************************************************************************/
-function login(userId) {
+function loginFinish(userId) {
     //1. Reset the login form in case user logs in again
     resetLoginForm();
     //2. Place user acct data of logged in user in global JS object
@@ -72,6 +75,13 @@ function login(userId) {
     profileBtn.style.backgroundImage = "url(" + userData.identityInfo.profilePic + ")";	
     profileBtn.classList.remove("hidden");
     document.title = "SpeedScore: Activity Feed";
+}
+
+function login(userId) {
+   loginBtn.setAttribute("aria-busy","true");   
+   loginBtnIcon.classList.remove("fa-sign-in-alt");   
+   loginBtnIcon.classList.add("fa-spinner", "fa-spin");   
+   setTimeout(() => loginFinish(userId),1000);
 }
 
 /*************************************************************************
