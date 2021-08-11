@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <!-- Title displays in page's tab.  -->
     <title>Log in to SpeedScore</title>
@@ -47,46 +47,50 @@
       </div>
     </header>
     <!--THE SIDE MENU -->
-    <ul id="sideMenu" role="menu" class="sidemenu hidden"
-        arial-labelledby="menuBtn">
-      <li role="menuitem" tabindex="-1">
-        Settings
-      </li>
-      <li role="menuitem" tabindex="-1">
-        About
-      </li>
-      <li role="menuitem" tabindex="-1">
-        Log Out
-      </li>
-    </ul>
+    <nav aria-label="Actions">
+      <ul id="sideMenu" role="menu" class="sidemenu hidden"
+          arial-labelledby="menuBtn">
+        <li role="menuitem" tabindex="-1">
+          Settings
+        </li>
+        <li role="menuitem" tabindex="-1">
+          About
+        </li>
+        <li role="menuitem" tabindex="-1">
+          Log Out
+        </li>
+      </ul>
+    </nav>
     <!-- "MODE" TABS -->
+    <nav aria-label="App Modes">
     <div id="modeTabs" class="modetab-container hidden" role="tablist" 
       aria-label="App Modes">
       <button id="feedMode" type="button" 
         class="modetab-btn modetab-selected" 
         role="tab" tabindex="0" aria-selected="true" 
-        aria-controls="feedModeMain">
+        aria-controls="feedModeTab">
         Feed
       </button>
       <button id="roundsMode" type="button" 
         class="modetab-btn" 
         role="tab" tabindex="-1" aria-selected="false" 
-        aria-controls="roundsModeMain">
+        aria-controls="roundsModeTab">
         Rounds
       </button>
       <button id="coursesMode" type="button" 
         class="modetab-btn" 
         role="tab" tabindex="-1" aria-selected="false" 
-        aria-controls="coursesModeMain">
+        aria-controls="coursesModeTab">
         Courses
       </button>
       <button id="buddiesMode" type="button" 
         class="modetab-btn" 
         role="tab" tabindex="-1" aria-selected="false" 
-        aria-controls="buddiesModeMain">
+        aria-controls="buddiesModeTab">
         Buddies
       </button>
     </div>
+    </nav>
     <main>
       <div id="feedModeTab" class="mode-page hidden" role="tabpanel"
         aria-label="Feed Tab" tabindex="0">
@@ -124,7 +128,7 @@
         <h1 class="mode-page-header">Buddies</h1>
         <p class="mode-page-content">This page is under construction.</p>
         <img class="mode-page-icon" src="images/sslogo2.png" alt="SpeedScore logo">
-        <button id="roundsModeActionBtn"  type="button" 
+        <button id="buddiesModeActionBtn"  type="button" 
                 class="float-btn">
           <span class="fas fa-search"></span>&nbsp;Find Buddies
         </button>
@@ -139,7 +143,7 @@
         <img class="mode-page-icon" src="images/sslogo2.png" 
             alt="SpeedScore logo">
         <div class="mode-page-btn-container">
-          <button id="feedModeActionBtn" 
+          <button id="feedModePostBtn" 
                   class="mode-page-btn action-dialog action-button" 
                   type="button">Post to Feed</button>
           <button id="feedModePostCancelBtn" 
@@ -157,7 +161,7 @@
         <img class="mode-page-icon" src="images/sslogo2.png" 
             alt="SpeedScore logo">
         <div class="mode-page-btn-container">
-          <button id="roundsModeActionBtn" 
+          <button id="roundsModePostBtn" 
                   class="mode-page-btn action-dialog action-button" 
                   type="button">Post Round</button>
           <button id="roundsModeCancelBtn" 
@@ -175,7 +179,7 @@
         <img class="mode-page-icon" src="images/sslogo2.png" 
             alt="SpeedScore logo">
         <div class="mode-page-btn-container">
-          <button id="coursesModeActionBtn" 
+          <button id="coursesModeAddBtn" 
                   class="mode-page-btn action-dialog action-button" 
                   type="button">Add Course</button>
           <button id="coursesModeCancelBtn" 
@@ -194,7 +198,7 @@
         <img class="mode-page-icon" src="images/sslogo2.png" 
             alt="SpeedScore logo">
         <div class="mode-page-btn-container">
-          <button id="buddiesModeActionBtn" 
+          <button id="buddiesModeSendBtn" 
                   class="mode-page-btn action-dialog action-button" 
                   type="button">Send Buddy Request</button>
           <button id="buddiesModeCancelBtn" 
@@ -221,10 +225,10 @@
             <div class="mb-3">
               <label for="email" class="form-label">Email:<br/>
                   <input id="email" type="email" class="form-control-lg centered"
-                  aria-describedby="loginIdDescr"
+                  aria-describedby="emailDescr"
                   required>
               </label>
-              <div id=emailDescr class="form-text">
+              <div id="emailDescr" class="form-text">
                 Enter a valid email address.
               </div>
             </div>
@@ -373,8 +377,8 @@
       </div> 
   <div id="profileSettingsDialog" class="mode-page hidden"
       role="dialog" aria-modal="true" 
-      aria-labelledby="profileSettingsHeader">
-    <h1 id="createAccountHeader" class="mode-page-header">Account & Profile</h1>
+      aria-labelledby="accountProfileHeader">
+    <h1 id="accountProfileHeader" class="mode-page-header">Account & Profile</h1>
     <p id="profileErrorBox" class="alert alert-danger centered hidden">
       <a id="profileEmailError" href="#profileEmail" class="alert-link">Enter a valid email address<br/></a>
       <a id="profileDisplayNameError" href="#profileDisplayName" class="alert-link">Enter a valid display name<br/></a>
@@ -640,7 +644,7 @@
       <div class="mode-page-btn-container">
         <button type="submit" id="submitUpdateProfileBtn" 
             class="btn btn-primary dialog-primary-btn" 
-            aria-live="polite" aria-loading="false">
+            aria-live="polite" aria-busy="false">
           <span id="editProfileBtnIcon" 
             class="fas fa-user-edit" 
             aria-hidden="true"></span>
