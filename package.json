@@ -6,7 +6,8 @@
   "dependencies": {},
   "devDependencies": {
     "axe-core": "^4.3.2",
-    "axe-testcafe": "^3.0.0"
+    "axe-testcafe": "^3.0.0",
+    "testcafe": "^1.15.3"
   },
   "scripts": {
     "test": "testcafe chrome .\\tests\\*"

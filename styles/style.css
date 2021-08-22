@@ -83,7 +83,7 @@
     left: 0px; 
     width: 100%; /* 100% of width of screen */
     align-items: center;
-    z-index: 100; /* Force it to be on top */
+    z-index: 200; /* Force it to be on top */
 }
 
 /* navbar-right-item styles items within navbar that should be right-justified.

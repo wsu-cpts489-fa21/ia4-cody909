@@ -11,7 +11,6 @@ test('openMenu', async t => {
 
 test('closeMenu', async t => {
     await t
-    //...
         .click('#menuBtn')
         .click("#menuBtn")
         .expect(Selector('#sideMenu').visible).eql(false);
