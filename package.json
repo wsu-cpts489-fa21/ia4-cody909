@@ -9,7 +9,7 @@
     "axe-testcafe": "^3.0.0"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "testcafe chrome .\\tests\\*"
   },
   "repository": {
     "type": "git",
