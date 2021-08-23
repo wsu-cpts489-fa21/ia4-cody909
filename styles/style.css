@@ -321,8 +321,16 @@
     padding-bottom: 8px;
 }
 
+.fm-legend-sm {
+    font-size: 18px;
+}
+
 .centered {
     text-align: center;
+}
+
+.fm-left-just {
+    text-align: left;
 }
 
 .highlight-error {

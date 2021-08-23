@@ -14,6 +14,7 @@
  * @global loginPage: The Log In page
  *************************************************************************/
 createAccountBtn.addEventListener("click",function(e) {
+    resetLoginForm();
     loginPage.classList.add("hidden");
     createAccountDialog.classList.remove("hidden");
     document.title = "Create Account";
@@ -97,8 +98,9 @@ accountCreatedClose.addEventListener("click",function() {
 /*************************************************************************
  * @function createAccount 
  * @desc 
- * Given a JavaScript object containing a new account, create the account,
- * return the user to the "Log In" page, and display a toast message
+ * Given a JavaScript object containing a new account, save the
+ * account to localStorage, return the user to the "Log In" page, 
+ * and display a toast message
  * indicating that a new account was created.
  * For now, we display the account data in an alert box. Eventually,
  * we will store the data to localStorage.
@@ -108,9 +110,34 @@ accountCreatedClose.addEventListener("click",function() {
  *         we display the email of the new account.
  * @global: accountCreated: The toast notification on the "Log In" page
   *************************************************************************/
-function createAccount(newAcct) {
+function createAccount() {
+    //Build account object from form data
+    const newAcct = {
+        accountInfo: {
+            email: acctEmailField.value, 
+            password: acctPasswordField.value,
+            securityQuestion: acctSecurityQuestionField.value,
+            securityAnswer: acctSecurityAnswerField.value
+        },
+        identityInfo: {
+            displayName: acctDisplayNameField.value,
+            profilePic: acctProfilePicImage.getAttribute("src"),
+        },
+        speedgolfInfo: {
+            bio: "",
+            homeCourse: "",
+            firstRound: "",
+            personalBest: {strokes: "",minutes: "", seconds: "", course: ""},
+            clubs: {},
+            clubComments: ""
+        }
+    };
+    //Save account to localStorage as key-value pair
+    localStorage.setItem(newAcct.accountInfo.email, 
+        JSON.stringify(newAcct));
+    //Reset form in case it is visited again
     resetCreateAccountForm();
-    alert("New account created: " + JSON.stringify(newAcct));
+    //Transition to "Log In" page
     document.title = "Log In to SpeedScore";
     createAccountDialog.classList.add("hidden");
     loginPage.classList.remove("hidden");
@@ -160,13 +187,7 @@ function createAccount(newAcct) {
     if (emailValid && passwordValid && repeatPasswordValid &&
         displayNameValid && securityQuestionValid & securityAnswerValid) { 
         //All is well -- Call createAccount()
-       createAccount({email: acctEmailField.value, 
-                      password: acctPasswordField.value,
-                      displayName: acctDisplayNameField.value,
-                      profilePic: acctProfilePicImage.getAttribute("src"),
-                      securityQuestion: acctSecurityQuestionField.value,
-                      securityAnswer: acctSecurityAnswerField.value
-                    });
+        createAccount();
        return;
     }
     //If here, at least one field is invalid: Display the errors

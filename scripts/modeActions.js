@@ -24,11 +24,11 @@ for (let i = 0; i < modeActionButtons.length; ++i) {
         //Hide tab panel
         modeTabPanels[currentMode].classList.add("hidden");
         //Hide and disable all UI elements
-        menuBtn.classList.add("disabled");
-        searchBtn.classList.add("disabled");
-        profileBtn.classList.add("disabled");
+        menuBtn.classList.add("hidden");
+        searchBtn.classList.add("hidden");
+        profileBtn.classList.add("hidden");
         skipLink.classList.add("hidden"); 
-        modeTabsContainer.classList.add("disabled");
+        modeTabsContainer.classList.add("hidden");
         //Show dialog box
         modeActionDialogs[currentMode].classList.remove("hidden");
         //Set focus to dialog box's action button
@@ -58,11 +58,11 @@ for (let i = 0; i < dialogActionButtons.length; ++i) {
         //Show tab panel
         modeTabPanels[currentMode].classList.remove("hidden");
         //Show and enable other UI elements
-        menuBtn.classList.remove("disabled");       
-        searchBtn.classList.remove("disabled"); 
-        profileBtn.classList.remove("disabled");                                 
+        menuBtn.classList.remove("hidden");       
+        searchBtn.classList.remove("hidden"); 
+        profileBtn.classList.remove("hidden");                                 
         skipLink.classList.remove("hidden"); 
-        modeTabsContainer.classList.remove("disabled"); 
+        modeTabsContainer.classList.remove("hidden"); 
         //Set focus to floating action button
         modeActionButtons[currentMode].focus();
         //TO DO: Implement mode-specific functionality
@@ -90,11 +90,11 @@ for (let i = 0; i < dialogCancelButtons.length; ++i) {
         //Hide dialog box
         modeActionDialogs[currentMode].classList.add("hidden");
         //Showand enable other UI elements
-        menuBtn.classList.remove("disabled");
-        searchBtn.classList.remove("disabled");
-        profileBtn.classList.remove("disabled");
+        menuBtn.classList.remove("hidden");
+        searchBtn.classList.remove("hidden");
+        profileBtn.classList.remove("hidden");
         skipLink.classList.remove("hidden"); 
-        modeTabsContainer.classList.remove("disabled");
+        modeTabsContainer.classList.remove("hidden");
         modeTabPanels[currentMode].classList.remove("hidden");
         //Set focus to floating action button
         modeActionButtons[currentMode].focus();
