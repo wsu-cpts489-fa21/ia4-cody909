@@ -25,5 +25,9 @@
     } else if (document.activeElement.classList
         .contains("action-dialog")) {
             keyDownDialogFocused(e);
+    } else if (createAccountDialog.contains(document.activeElement)) {
+        keyDownCreateDialogFocused(e);
+    }  else if (profileSettingsDialog.contains(document.activeElement)) {
+        keyDownUpdateDialogFocused(e);
     }
  });
