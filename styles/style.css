@@ -126,7 +126,7 @@
    It should be text color in a large font.
 */
 .navbar-title {
-    margin: 14px 0px 14px 4px;
+    margin: 0px 0px 0px 4px;
     color: var(--text-color);
     font-size: 26px;  
 }
@@ -154,7 +154,7 @@
 /* sidemenu -- Styles the side menu */
 .sidemenu {
     position: fixed; /* Menu stays in place */
-    top: 64px; /* Position menu just below top navbar */
+    top: 56px; /* Position menu just below top navbar */
     padding: 0; /* Remove padding */
     margin: 0; /* Remove margins */
     z-index: 200; /* Force the menu to be near the front */
@@ -209,8 +209,8 @@
     font-variant: small-caps;
     width: 25%;
     text-align: center;
-    padding-top: 6px;
-    padding-bottom: 6px;
+    padding-top: 4px;
+    padding-bottom: 4px;
     cursor: pointer;
 }   
 
@@ -271,7 +271,7 @@
 /* Float-btn -- Styling for the floating action button. */
    .float-btn {
         position:fixed;
-        width: 120px;
+        width: 130px;
         height: 40px;
         bottom: 20px;
         right: 20px;
