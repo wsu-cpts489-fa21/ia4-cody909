@@ -120,6 +120,12 @@ const allClubs = ["Driver","3W","4W","5W","Hybrid","1I","2I","3I","4I","5I","6I"
 const profileClubsInBagChecks = document.getElementById("clubsDiv").querySelectorAll("input");
 const profileClubCommentsField = document.getElementById("sgClubComments");
 const cancelUpdateProfileBtn = document.getElementById("cancelUpdateProfileBtn");
+
+//Global variables to provide easy access to Log Round Dialog elements
+const roundStrokes = document.getElementById("roundStrokes");
+const roundMinutes = document.getElementById("roundMinutes");
+const roundSeconds = document.getElementById("roundSeconds");
+const roundSGS = document.getElementById("roundSGS");
 //Default profile picture
 defaultProfilePic = "../images/DefaultProfilePic.jpg";
 

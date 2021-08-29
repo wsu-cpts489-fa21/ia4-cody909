@@ -256,12 +256,25 @@
 
 .mode-page-btn {
     display: inline;
-    font-size: 18px;
+    font-size: 36px;
+    width: 30%;
     margin-left: auto;
     margin-right: auto;
     display: block;
     color: var(--text-color);
     background-color: var(--main-color);
+    cursor: pointer;
+}
+
+.mode-page-btn-cancel {
+    display: inline;
+    font-size: 36px;
+    width: 30%;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    color: var(--text-color);
+    background-color: var(--main-red-color);
     cursor: pointer;
 }
 
