@@ -45,10 +45,8 @@
           title="Edit Profile" aria-label="Account Settings">
         </button> 
       </div>
-    </header>
-    <!--THE SIDE MENU -->
-    <nav aria-label="Actions">
-      <ul id="sideMenu" role="menu" class="sidemenu hidden"
+      <!--THE SIDE MENU -->
+      <ul id="sideMenu" role="menu" class="sidemenu"
           arial-labelledby="menuBtn">
         <li role="menuitem" tabindex="-1">
           Settings
@@ -60,39 +58,37 @@
           Log Out
         </li>
       </ul>
-    </nav>
-    <!-- "MODE" TABS -->
-    <nav aria-label="App Modes">
-    <div id="modeTabs" class="modetab-container hidden" role="tablist" 
-      aria-label="App Modes">
-      <button id="feedMode" type="button" 
-        class="modetab-btn modetab-selected" 
-        role="tab" tabindex="0" aria-selected="true" 
-        aria-controls="feedModeTab">
-        Feed
-      </button>
-      <button id="roundsMode" type="button" 
-        class="modetab-btn" 
-        role="tab" tabindex="-1" aria-selected="false" 
-        aria-controls="roundsModeTab">
-        Rounds
-      </button>
-      <button id="coursesMode" type="button" 
-        class="modetab-btn" 
-        role="tab" tabindex="-1" aria-selected="false" 
-        aria-controls="coursesModeTab">
-        Courses
-      </button>
-      <button id="buddiesMode" type="button" 
-        class="modetab-btn" 
-        role="tab" tabindex="-1" aria-selected="false" 
-        aria-controls="buddiesModeTab">
-        Buddies
-      </button>
-    </div>
-    </nav>
+    </header>
     <main>
-      <div id="feedModeTab" class="mode-page hidden" role="tabpanel"
+        <!-- "MODE" TABS -->
+        <div id="modeTabs" class="modetab-container" role="tablist" 
+        aria-label="App Modes">
+        <button id="feedMode" type="button" 
+          class="modetab-btn modetab-selected" 
+          role="tab" tabindex="0" aria-selected="true" 
+          aria-controls="feedModeTab">
+          Feed
+        </button>
+        <button id="roundsMode" type="button" 
+          class="modetab-btn" 
+          role="tab" tabindex="-1" aria-selected="false" 
+          aria-controls="roundsModeTab">
+          Rounds
+        </button>
+        <button id="coursesMode" type="button" 
+          class="modetab-btn" 
+          role="tab" tabindex="-1" aria-selected="false" 
+          aria-controls="coursesModeTab">
+          Courses
+        </button>
+        <button id="buddiesMode" type="button" 
+          class="modetab-btn" 
+          role="tab" tabindex="-1" aria-selected="false" 
+          aria-controls="buddiesModeTab">
+          Buddies
+        </button>
+      </div>
+      <div id="feedModeTab" class="mode-page" role="tabpanel"
         aria-label="Feed Tab" tabindex="0">
         <h1 class="mode-page-header">Activity Feed</h1>
         <p class="mode-page-content">This page is under construction.</p>
@@ -164,7 +160,7 @@
           <button id="roundsModePostBtn" 
                   class="mode-page-btn action-dialog action-button" 
                   type="button">Post Round</button>
-          <button id="roundsModeCancelBtn" 
+          <button id="roundsModePostCancelBtn" 
                   class="mode-page-btn action-dialog cancel-button"
                   type="button">Cancel</button>
         </div>
@@ -182,7 +178,7 @@
           <button id="coursesModeAddBtn" 
                   class="mode-page-btn action-dialog action-button" 
                   type="button">Add Course</button>
-          <button id="coursesModeCancelBtn" 
+          <button id="coursesModeCancelAddBtn" 
                   class="mode-page-btn action-dialog cancel-button"
                   type="button">Cancel</button>
         </div>
@@ -198,10 +194,10 @@
         <img class="mode-page-icon" src="images/sslogo2.png" 
             alt="SpeedScore logo">
         <div class="mode-page-btn-container">
-          <button id="buddiesModeSendBtn" 
+          <button id="buddiesModeSendRequestBtn" 
                   class="mode-page-btn action-dialog action-button" 
                   type="button">Send Buddy Request</button>
-          <button id="buddiesModeCancelBtn" 
+          <button id="buddiesModeSendRequestCancelBtn" 
                   class="mode-page-btn action-dialog cancel-button"
                   type="button">Cancel</button>
         </div>

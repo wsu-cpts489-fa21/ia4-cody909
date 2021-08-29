@@ -1,0 +1,29 @@
+{
+  "name": "speedscore-book",
+  "version": "1.0.0",
+  "description": "SpeedScore Book Version",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "axe-core": "^4.3.2",
+    "axe-testcafe": "^3.0.0",
+    "testcafe": "^1.15.3"
+  },
+  "scripts": {
+    "test": "testcafe chrome .\\tests\\*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FSWebDevBook/speedscore-book.git"
+  },
+  "keywords": [
+    "Speedgolf",
+    "SpeedScore"
+  ],
+  "author": "Chris Hundhausen",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/FSWebDevBook/speedscore-book/issues"
+  },
+  "homepage": "https://github.com/FSWebDevBook/speedscore-book#readme"
+}
