@@ -56,7 +56,7 @@ dialogActionButtons[3].addEventListener("click",
 /*************************************************************************
  * @function Dialog Box Cancel Button CLICK handler 
  * @Desc 
- * When the user clicks on the cancel button in a dialog box, we
+ * When the user clicks on the cancel button in a dialog box, by default we
  * close the dialog box; restore the navigation bar buttons; 
  *  show the mode tabs; restore the current mode's main page; and set the 
  * focus to the current mode's action button. We use currentMode to 
@@ -69,10 +69,18 @@ dialogActionButtons[3].addEventListener("click",
  * each mode's dialog box
  *************************************************************************/
 /* Dialog Cancel Button Click Handler */
-for (let i = 0; i < dialogCancelButtons.length; ++i) {
-    dialogCancelButtons[i].addEventListener("click",
-      () => transitionFromDialog(modeActionDialogs[i]));
-}
+    dialogCancelButtons[0].addEventListener("click",
+      () => transitionFromDialog(modeActionDialogs[0]));
+    dialogCancelButtons[1].addEventListener("click",function() {
+        resetLogRoundForm();
+        transitionFromDialog(modeActionDialogs[1]);
+    });
+    dialogCancelButtons[2].addEventListener("click",
+      () => transitionFromDialog(modeActionDialogs[2]));
+    dialogCancelButtons[3].addEventListener("click",
+      () => transitionFromDialog(modeActionDialogs[3]));
+
+
 
 /*************************************************************************
  * @function keyDownDialogFocused

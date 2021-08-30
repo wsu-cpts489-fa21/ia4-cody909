@@ -72,12 +72,13 @@ function resetLogRoundForm() {
   roundMinutes.value = "60";
   roundSeconds.value = "00";
   roundSGS.value = "140:00";
-  roundNotesErr.classList.add("hidden");
+  roundDateErr.classList.add("hidden");
   roundCourseErr.classList.add("hidden");
   roundStrokesErr.classList.add("hidden");
-  roundMinutes.classList.add("hidden");
+  roundMinutesErr.classList.add("hidden");
   roundSecondsErr.classList.add("hidden");
   roundNotesErr.classList.add("hidden");
+  roundErrBox.classList.add("hidden");
   firstFocusableLogRoundItem = roundDate;
 }
 
