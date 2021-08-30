@@ -42,7 +42,9 @@ document.querySelectorAll("button.action-button");
 //array of "Cancel" buttons within the dialog boxes
 const dialogCancelButtons =
 document.querySelectorAll("button.cancel-button");
-
+//array of app titles to display when mode dialogs are active
+const dialogTitles = ["SpeedScore: Post to Feed","SpeedScore: Log Round",
+  "SpeedScore: Add Course","SpeedScore: Find Buddies"];
 //Global variables to provide easy access to top-level UI elements
 const menuBtn =  document.getElementById("menuBtn"); 
 const sideMenu = document.getElementById("sideMenu");
@@ -122,10 +124,29 @@ const profileClubCommentsField = document.getElementById("sgClubComments");
 const cancelUpdateProfileBtn = document.getElementById("cancelUpdateProfileBtn");
 
 //Global variables to provide easy access to Log Round Dialog elements
+const roundsModeDialog = document.getElementById("roundsModeDialog");
+const logRoundForm = document.getElementById("logRoundForm");
+const roundErrBox = document.getElementById("roundErrorBox");
+const roundDateErr = document.getElementById("roundDateError");
+const roundCourseErr = document.getElementById("roundCourseError");
+const roundStrokesErr = document.getElementById("roundStrokesError");
+const roundMinutesErr = document.getElementById("roundMinutesError");
+const roundSecondsErr = document.getElementById("roundSecondsError");
+const roundNotesErr = document.getElementById("roundNotesError");
+const roundDate = document.getElementById("roundDate");
+const roundCourse = document.getElementById("roundCourse");
+const roundType = document.getElementById("roundType");
+const roundHoles = document.getElementById("roundHoles");
 const roundStrokes = document.getElementById("roundStrokes");
 const roundMinutes = document.getElementById("roundMinutes");
 const roundSeconds = document.getElementById("roundSeconds");
 const roundSGS = document.getElementById("roundSGS");
+
+//Global variables to provide easy access to "Rounds" mode toast
+const roundUpdatedClose = document.getElementById("roundUpdatedClose");
+const roundUpdated = document.getElementById("roundUpdated");
+const roundUpdatedMsg = document.getElementById("roundUpdatedMsg");
+
 //Default profile picture
 defaultProfilePic = "../images/DefaultProfilePic.jpg";
 
@@ -174,12 +195,18 @@ defaultProfilePic = "../images/DefaultProfilePic.jpg";
  * @global currentMode, index of current mode.
  *************************************************************************/
  function transitionFromDialog(dialogToClose) {
+  //Hide dialog
+  dialogToClose.classList.add("hidden");
+  //Show app banner and mode tabs
   skipLink.classList.remove("hidden"); 
   menuBtn.classList.remove("hidden");
   searchBtn.classList.remove("hidden");
   profileBtn.classList.remove("hidden");
   modeTabsContainer.classList.remove("hidden");
+  //Show current mode panel
   modeTabPanels[currentMode].classList.remove("hidden");
+  //Reset app title
   document.title = "SpeedScore: " + modeNames[currentMode];
-  dialogToClose.classList.add("hidden");
+  //Set focus to action button in current mode
+  modeActionButtons[currentMode].focus();
 }

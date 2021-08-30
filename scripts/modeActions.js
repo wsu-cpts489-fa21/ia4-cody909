@@ -20,30 +20,21 @@
  * each mode's dialog box
  *************************************************************************/
 for (let i = 0; i < modeActionButtons.length; ++i) {
-    modeActionButtons[i].addEventListener("click",function(e) {
-        //Hide tab panel
-        modeTabPanels[currentMode].classList.add("hidden");
-        //Hide and disable all UI elements
-        menuBtn.classList.add("hidden");
-        searchBtn.classList.add("hidden");
-        profileBtn.classList.add("hidden");
-        skipLink.classList.add("hidden"); 
-        modeTabsContainer.classList.add("hidden");
-        //Show dialog box
-        modeActionDialogs[currentMode].classList.remove("hidden");
-        //Set focus to dialog box's action button
-        dialogActionButtons[currentMode].focus();
-    });
+    modeActionButtons[i].addEventListener("click",
+      () => transitionToDialog(modeActionDialogs[i],dialogTitles[i]));
 }
 
 /*************************************************************************
  * @function Dialog Box Action Button CLICK handler 
  * @Desc 
- * When the user clicks on the primary action button in a dialog box, we
- * perform the corresponding action, close the dialog box; restore 
- * the navigation bar buttons; show the mode tabs; restore the 
- * current mode's main page; and set the focus to the current mode's 
- * action button. We use currentMode to determine which mode we're in.
+ * When the user clicks on the primary action button in a dialog box,
+ * he placeholder behavior is to call transitionFromDialog to close
+ * the dialog box; restore the navigation bar buttons; show the 
+ * mode tabs and the current mode's main page; and set the focus 
+ * to the current mode's action button.
+ * NOTE: This behavior is only the default. When we implement the
+ * behavior of a mode dialog, we should remove the corresponding
+ * click handler's default behavior.
  * @global currentMode: index of current mode
  * @global modeTabsContainer: the <div> containing the mode tab buttons
  * @global modeTabPanels: array of tab panels for each mode
@@ -51,23 +42,16 @@ for (let i = 0; i < modeActionButtons.length; ++i) {
  * @global dialogActionButtons: array of default ("OK") buttons for
  * each mode's dialog box
  *************************************************************************/
-for (let i = 0; i < dialogActionButtons.length; ++i) {
-    dialogActionButtons[i].addEventListener("click",function(e) {
-        //Hide dialog box
-        modeActionDialogs[currentMode].classList.add("hidden");
-        //Show tab panel
-        modeTabPanels[currentMode].classList.remove("hidden");
-        //Show and enable other UI elements
-        menuBtn.classList.remove("hidden");       
-        searchBtn.classList.remove("hidden"); 
-        profileBtn.classList.remove("hidden");                                 
-        skipLink.classList.remove("hidden"); 
-        modeTabsContainer.classList.remove("hidden"); 
-        //Set focus to floating action button
-        modeActionButtons[currentMode].focus();
-        //TO DO: Implement mode-specific functionality
-    });
-}
+ //Feed mode
+ dialogActionButtons[0].addEventListener("click",
+        () => transitionFromDialog(modeActionDialogs[0]));
+//Courses mode
+dialogActionButtons[2].addEventListener("click",
+        () => transitionFromDialog(modeActionDialogs[2]));
+//Buddies mode
+dialogActionButtons[3].addEventListener("click",
+        () => transitionFromDialog(modeActionDialogs[3]));
+       
 
 /*************************************************************************
  * @function Dialog Box Cancel Button CLICK handler 
@@ -86,19 +70,8 @@ for (let i = 0; i < dialogActionButtons.length; ++i) {
  *************************************************************************/
 /* Dialog Cancel Button Click Handler */
 for (let i = 0; i < dialogCancelButtons.length; ++i) {
-    dialogCancelButtons[i].addEventListener("click",function(e) {
-        //Hide dialog box
-        modeActionDialogs[currentMode].classList.add("hidden");
-        //Showand enable other UI elements
-        menuBtn.classList.remove("hidden");
-        searchBtn.classList.remove("hidden");
-        profileBtn.classList.remove("hidden");
-        skipLink.classList.remove("hidden"); 
-        modeTabsContainer.classList.remove("hidden");
-        modeTabPanels[currentMode].classList.remove("hidden");
-        //Set focus to floating action button
-        modeActionButtons[currentMode].focus();
-    });
+    dialogCancelButtons[i].addEventListener("click",
+      () => transitionFromDialog(modeActionDialogs[i]));
 }
 
 /*************************************************************************

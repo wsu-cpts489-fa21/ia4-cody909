@@ -29,5 +29,7 @@
         keyDownCreateDialogFocused(e);
     }  else if (profileSettingsDialog.contains(document.activeElement)) {
         keyDownUpdateDialogFocused(e);
+    } else if (roundsModeDialog.contains(document.activeElement)) {
+        keyDownRoundDialogFocused(e);
     }
  });

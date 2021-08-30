@@ -130,7 +130,8 @@ function createAccount() {
             personalBest: {strokes: "",minutes: "", seconds: "", course: ""},
             clubs: {},
             clubComments: ""
-        }
+        },
+        rounds: []
     };
     //Save account to localStorage as key-value pair
     localStorage.setItem(newAcct.accountInfo.email, 

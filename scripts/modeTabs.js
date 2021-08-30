@@ -29,6 +29,8 @@
     //Switch tab panel
     modeTabPanels[currentMode].classList.add("hidden");
     modeTabPanels[newMode].classList.remove("hidden");
+    //Switch app title
+    document.title = "SpeedScore: " + modeNames[newMode];
     currentMode = newMode; //Change mode
     focusedMode = newMode; //Change focused mode
 }
