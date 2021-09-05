@@ -102,13 +102,15 @@ roundUpdatedClose.addEventListener("click",function() {
 * @global userData: the current user's data object
 *************************************************************************/
 function addRoundToTable(roundIndex) {
+  const myRounds = userData.rounds;
   const roundId = userData.rounds[roundIndex].roundNum;
   if (roundsTable.rows[1].innerHTML.includes ("colspan")) {
     //empty table! Remove this row before adding new one
     roundsTable.deleteRow(1);
   }
- //Write new row containing new round to table
-  let thisRound = roundsTable.insertRow(1);
+  //Write new row containing new round to table body
+  const thisRoundBody = roundsTable.querySelector("tbody");
+  thisRound = thisRoundBody.insertRow(0); //insert as first table row
   thisRound.id = "r-" + roundId; //set unique id of this row so we can access it later
   thisRound.innerHTML = "<td>" + userData.rounds[roundIndex].date + "</td><td>" +
     userData.rounds[roundIndex].course + "</td><td>" + 
@@ -124,6 +126,11 @@ function addRoundToTable(roundIndex) {
     "<span class='fas fa-trash'></span></button></td>";
  }
 
+function populateRoundsTable() {
+  for (let i = 0; i < userData.rounds.length; ++i) {
+    addRoundToTable(i);
+  }
+}
 
 /*************************************************************************
 * @function logRound 
