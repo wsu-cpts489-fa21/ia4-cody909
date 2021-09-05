@@ -126,6 +126,13 @@ function addRoundToTable(roundIndex) {
     "<span class='fas fa-trash'></span></button></td>";
  }
 
+/*************************************************************************
+* @function populateRoundsTable 
+* @desc 
+* Iterate through the userData.rounds array, adding a row corresponding
+* to each round stored in the array. 
+* @global userData: object containing the current user's data
+*************************************************************************/
 function populateRoundsTable() {
   for (let i = 0; i < userData.rounds.length; ++i) {
     addRoundToTable(i);

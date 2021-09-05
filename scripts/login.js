@@ -65,7 +65,9 @@ function loginFinish(userId) {
     resetLoginForm();
     //2. Place user acct data of logged in user in global JS object
     userData = JSON.parse(localStorage.getItem(userId));
-    //3. Reset state of app with user logged in.
+    //3. Populate app with user data
+    populateRoundsTable();
+    //4. Reset state of app with user logged in.
     loginPage.classList.add("hidden");
     modeTabsContainer.classList.remove("hidden");
     modeTabPanels[currentMode].classList.remove("hidden");
