@@ -101,9 +101,8 @@ roundUpdatedClose.addEventListener("click",function() {
 * userData.rounds, to the "Rounds" table.
 * @global userData: the current user's data object
 *************************************************************************/
-function addRoundToTable() {
-  const roundId = userData.roundCount;
-  const roundIndex = userData.rounds.length-1;
+function addRoundToTable(roundIndex) {
+  const roundId = userData.rounds[roundIndex].roundNum;
   if (roundsTable.rows[1].innerHTML.includes ("colspan")) {
     //empty table! Remove this row before adding new one
     roundsTable.deleteRow(1);
@@ -160,7 +159,7 @@ function logRound() {
     notes: roundNotes.value,
     roundNum: ++(userData.roundCount)
   };
-  //Push round object to rounds array
+  //Push round object to end of rounds array
   userData.rounds.push(newRound);
   //Save to local storage
   localStorage.setItem(userData.accountInfo.email,
@@ -168,7 +167,7 @@ function logRound() {
   //Reset form to prepare for next visit
   resetLogRoundForm();
   //Add new round to table
-  addRoundToTable();
+  addRoundToTable(userData.rounds.length-1);
   //Transition back to mode page
   roundUpdatedMsg.textContent = "New Round Logged!";
   roundUpdated.classList.remove("hidden");
