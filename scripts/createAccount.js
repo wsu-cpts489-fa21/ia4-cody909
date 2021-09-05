@@ -131,7 +131,8 @@ function createAccount() {
             clubs: {},
             clubComments: ""
         },
-        rounds: []
+        rounds: [],
+        roundCount: 0
     };
     //Save account to localStorage as key-value pair
     localStorage.setItem(newAcct.accountInfo.email, 

@@ -147,6 +147,9 @@ const roundUpdatedClose = document.getElementById("roundUpdatedClose");
 const roundUpdated = document.getElementById("roundUpdated");
 const roundUpdatedMsg = document.getElementById("roundUpdatedMsg");
 
+//Global variables to provide easy access to "Rounds" mode table
+roundsTable = document.getElementById("roundsTable");
+
 //Default profile picture
 defaultProfilePic = "../images/DefaultProfilePic.jpg";
 

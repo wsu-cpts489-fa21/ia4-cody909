@@ -72,6 +72,7 @@ function resetLogRoundForm() {
   roundMinutes.value = "60";
   roundSeconds.value = "00";
   roundSGS.value = "140:00";
+  roundNotes.value = "";
   roundDateErr.classList.add("hidden");
   roundCourseErr.classList.add("hidden");
   roundStrokesErr.classList.add("hidden");
@@ -84,7 +85,7 @@ function resetLogRoundForm() {
 
 /*************************************************************************
 * @function roundUpdatedClose CLICK Handler 
-* @Desc 
+* @desc 
 * When the user clicks on the close button of the "Round Logged"
 * toast notification on the "Rounds" mode page, close it.
 * @global roundLogged: The "Round Logged" toast
@@ -94,11 +95,44 @@ roundUpdatedClose.addEventListener("click",function() {
 });
 
 /*************************************************************************
+* @function addRoundToTable 
+* @desc 
+* Adds a newly logged round, which assumed to be the last array entry in
+* userData.rounds, to the "Rounds" table.
+* @global userData: the current user's data object
+*************************************************************************/
+function addRoundToTable() {
+  const roundId = userData.roundCount;
+  const roundIndex = userData.rounds.length-1;
+  if (roundsTable.rows[1].innerHTML.includes ("colspan")) {
+    //empty table! Remove this row before adding new one
+    roundsTable.deleteRow(1);
+  }
+ //Write new row containing new round to table
+  let thisRound = roundsTable.insertRow(1);
+  thisRound.id = "r-" + roundId; //set unique id of this row so we can access it later
+  thisRound.innerHTML = "<td>" + userData.rounds[roundIndex].date + "</td><td>" +
+    userData.rounds[roundIndex].course + "</td><td>" + 
+    userData.rounds[roundIndex].SGS + " (" + userData.rounds[roundIndex].strokes +
+    " in " + userData.rounds[roundIndex].minutes + ":" + 
+    userData.rounds[roundIndex].seconds + 
+    ")</td>" +
+    "<td><button aria-label='View and Edit Round'" + 
+    "onclick='editRound(" + roundId + ")'><span class='fas fa-eye'>" +
+    "</span>&nbsp;<span class='fas fa-edit'></span></button></td>" +
+    "<td><button aria-label='Delete Round'" + 
+    "onclick='confirmDelete(" + roundId + ")'>" +
+    "<span class='fas fa-trash'></span></button></td>";
+ }
+
+
+/*************************************************************************
 * @function logRound 
 * @desc 
-* Given a JavaScript object containing a new round, save the
-* round to localStorage, return the user to "Rounds" mode page, 
-* and display a toast message indicating that a new round was logged.
+* Build a JavaScript object containing a new round data, save the
+* round to localStorage, update the "Rounds"table, return the user to 
+* "Rounds" mode page, and display a toast message indicating that a 
+* new round was logged.
 * @global loginPage: The "Log In" page
 * @global roundDate: The date field in "Log Round" form
 * @global roundDate: The course field in "Log Round" form
@@ -113,7 +147,7 @@ roundUpdatedClose.addEventListener("click",function() {
 * @global roundUpdatedMsg: The message field of the round updated toast
 *************************************************************************/
 function logRound() {
-  //Build round object from form data
+  //Create new object with form data
   const newRound = {
     date: roundDate.value,
     course: roundCourse.value,
@@ -123,14 +157,18 @@ function logRound() {
     minutes: roundMinutes.value,
     seconds: roundSeconds.value,
     SGS: roundSGS.value,
-    notes: roundNotes.value
+    notes: roundNotes.value,
+    roundNum: ++(userData.roundCount)
   };
+  //Push round object to rounds array
   userData.rounds.push(newRound);
   //Save to local storage
   localStorage.setItem(userData.accountInfo.email,
     JSON.stringify(userData));
   //Reset form to prepare for next visit
   resetLogRoundForm();
+  //Add new round to table
+  addRoundToTable();
   //Transition back to mode page
   roundUpdatedMsg.textContent = "New Round Logged!";
   roundUpdated.classList.remove("hidden");
