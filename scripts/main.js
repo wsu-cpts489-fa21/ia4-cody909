@@ -10,6 +10,10 @@
 //securityQuestion, securityAnswer
 let userData = {}; //set upon login
 
+//Global variable that stores the index of a round (in the userData object)
+//to be edited or deleted
+let roundIndex; 
+
 //Global variables to help manage the menu */
 let focusedMenuItem = 0; //Array index of the menu item with focus
 //Array of the HTML elements that are menu items
@@ -125,6 +129,10 @@ const cancelUpdateProfileBtn = document.getElementById("cancelUpdateProfileBtn")
 
 //Global variables to provide easy access to Log Round Dialog elements
 const roundsModeDialog = document.getElementById("roundsModeDialog");
+const roundFormHeader = document.getElementById("roundFormHeader");
+const roundFormSubmitBtn = document.getElementById("roundFormSubmitBtn");
+const roundFormSubmitBtnLabel = document.getElementById("roundFormSubmitBtnLabel");
+const roundFormSubmitBtnIcon = document.getElementById("roundFormSubmitBtnIcon");
 const logRoundForm = document.getElementById("logRoundForm");
 const roundErrBox = document.getElementById("roundErrorBox");
 const roundDateErr = document.getElementById("roundDateError");
@@ -172,7 +180,7 @@ defaultProfilePic = "../images/DefaultProfilePic.jpg";
  * @global modeTabPanels: array of tab panels 
  * @global currentMode, index of current mode.
  *************************************************************************/
- function transitionToDialog(dialog, dialogTitle) {
+ function transitionToDialog(dialog, dialogTitle, dialogPrepFunc) {
   skipLink.classList.add("hidden"); 
   menuBtn.classList.add("hidden");
   searchBtn.classList.add("hidden");
@@ -180,6 +188,7 @@ defaultProfilePic = "../images/DefaultProfilePic.jpg";
   modeTabsContainer.classList.add("hidden");
   modeTabPanels[currentMode].classList.add("hidden");
   document.title = dialogTitle;
+  dialogPrepFunc();
   dialog.classList.remove("hidden");
 }
 

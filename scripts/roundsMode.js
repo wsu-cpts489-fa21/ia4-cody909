@@ -24,7 +24,8 @@ function updateSGS() {
     roundSGS.value = 
       (roundStrokes.valueAsNumber + roundMinutes.valueAsNumber) + 
       ":" + roundSeconds.value
-  }
+}
+
 /*************************************************************************
  * @function changeSeconds 
  * @Desc 
@@ -40,6 +41,74 @@ function changeSeconds() {
       roundSeconds.value = "0" + roundSeconds.value;
     }
     updateSGS();
+}
+
+/*************************************************************************
+ * @function prepLogRoundForm 
+ * @desc 
+ * Prepares the round form to log a new round by setting the header text
+ * and button label to "Log Round," and by setting the button's icon
+ * @global roundFormHeader: Form's H1 element
+ * @global roundFormSubmitBtnLabel: Form's button label
+ * @global roundFormSubmitBtnIcon: Form's button icon
+ *************************************************************************/
+function prepLogRoundForm() {
+    roundFormHeader.textContent = "Log Round";
+    roundFormSubmitBtnLabel.innerHTML = "&nbsp;Log Round";
+    if (roundFormSubmitBtnIcon.classList.contains("fa-edit")) {
+      roundFormSubmitBtnIcon.classList.remove("fa-edit");
+    }
+    if (!roundFormSubmitBtnIcon.classList.contains("fa-save")) {
+      roundFormSubmitBtnIcon.classList.add("fa-save");
+    }
+  }
+
+  /*************************************************************************
+ * @function prepEditRoundForm 
+ * @desc 
+ * Prepares the round form to edit an existing round by setting the app's
+ * title, and the form button's label and icon.
+ * and button label to "Log Round," and by setting the button's icon
+ * @global roundFormHeader: Form's H1 element
+ * @global roundFormSubmitBtnLabel: Form's button label
+ * @global roundFormSubmitBtnIcon: Form's button icon
+ *************************************************************************/
+  function prepEditRoundForm() {
+      roundFormHeader.textContent = "Edit Round";
+      roundFormSubmitBtnLabel.innerHTML = "&nbsp;Update Round";
+      if (roundFormSubmitBtnIcon.classList.contains("fa-save")) {
+        roundFormSubmitBtnIcon.classList.remove("fa-save");
+      }
+      if (!roundFormSubmitBtnIcon.classList.contains("fa-edit")) {
+        roundFormSubmitBtnIcon.classList.add("fa-edit");
+      }
+  }
+
+  /*************************************************************************
+ * @function fillRoundForm 
+ * @desc 
+ * Prepares the round form for editing by filling it with the data on the
+ * round to be edited. 
+ * @param round: An object containing the round data
+ * @global roundDate: Form's date field
+ * @global roundCourse: Form's course field
+ * @global roundType: Form's type field
+ * @global roundStrokes: Form's strokes field
+ * @global roundMinutes: Form's minutes field
+ * @global roundSeconds: Form's seconds field
+ * @global roundSGS: Form's Speedgolf Score field
+ * @global roundNotes: Form's notes field
+ *************************************************************************/
+  function fillRoundForm(round) {
+    roundDate.value = round.date;
+    roundCourse.value = round.course;
+    roundType.value = round.type;
+    roundHoles.value = round.holes;
+    roundStrokes.value = round.strokes;
+    roundMinutes.value = round.minutes;
+    roundSeconds.value = round.seconds;
+    roundSGS.value = round.SGS;
+    roundNotes.value = round.notes;
   }
 
   /*************************************************************************
@@ -54,6 +123,7 @@ function changeSeconds() {
  * @global roundMinutes: Form's minutes field
  * @global roundSeconds: Form's seconds field
  * @global roundSGS: Form's Speedgolf Score field
+ * @global roundNotes: Form's notes field
  * @global roundsErrBox: <div> containing the error messages
  * @global roundCourseErr: Error message for course field
  * @global roundStrokesErr: Error message for strokes field
@@ -137,6 +207,31 @@ function populateRoundsTable() {
   for (let i = 0; i < userData.rounds.length; ++i) {
     addRoundToTable(i);
   }
+}
+
+/*************************************************************************
+* @function editRound 
+* @desc 
+* Set to click handler of "View/Edit" button associated with each row of
+* "Rounds" table. Sets up the round mode form to enable users to view and
+* edit the data on the round on which they clicked, then transitions to
+* the round mode form modal dialog. The index of the round being edited
+* is saved to the global variable roundIndex so that data on this round
+* can be saved when the form is submitted. 
+* @param roundId the unique id of the round that was clicked by the user
+* @global userData: object containing the current user's data
+*************************************************************************/
+function editRound(roundId) {
+  //Find current array index of this round
+  for (roundIndex = 0; roundIndex < userData.rounds.length; ++roundIndex) {
+    if (userData.rounds[roundIndex].roundNum === roundId) {
+      break;
+    }
+  }
+  //Populate form with round data to be edited.
+  fillRoundForm(userData.rounds[roundIndex]);
+  //Display dialog
+  transitionToDialog(roundsModeDialog,"SpeedScore: Edit Round",prepEditRoundForm);
 }
 
 /*************************************************************************
@@ -287,21 +382,6 @@ logRoundForm.addEventListener("submit",function(e) {
 } else {
     roundDateErr.classList.add("hidden");
 }
-});
-
-/*************************************************************************
-* @function cancelCreateAccountBtn CLICK Handler 
-* @Desc 
-* When the user clicks the "Cancel" button to exit "Create Account" Dialog, 
-* reset the form and transition to the Log In page.
-* @global createAccountDialog: The "Create Account" dialog
-* @global loginPage: The Log In page
-*************************************************************************/
-cancelCreateAccountBtn.addEventListener("click",function(e) {
-  resetCreateAccountForm();
-  document.title = "Log In to SpeedScore";
-  createAccountDialog.classList.add("hidden");
-  loginPage.classList.remove("hidden");
 });
 
 /*************************************************************************

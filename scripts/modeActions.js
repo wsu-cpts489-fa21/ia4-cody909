@@ -6,6 +6,19 @@
 *************************************************************************/
 
 /*************************************************************************
+ * @function emptyFunc
+ * @desc 
+ * An empty placeholder function that does nothing. In cases where no
+ * preparation is needed prior to opening a mode's primary modal dialog,
+ * pass in this function. 
+ *************************************************************************/
+function emptyFunc() {}
+
+//Array of functions to prepare each mode's primary modal dialog prior to
+//opening it.
+let dialogPrepFuncs = [emptyFunc, prepLogRoundForm, emptyFunc, emptyFunc];
+
+/*************************************************************************
  * @function Mode Floating Action Button CLICK handler 
  * @Desc 
  * When the user clicks on the action button in the current mode, we 
@@ -21,7 +34,7 @@
  *************************************************************************/
 for (let i = 0; i < modeActionButtons.length; ++i) {
     modeActionButtons[i].addEventListener("click",
-      () => transitionToDialog(modeActionDialogs[i],dialogTitles[i]));
+      () => transitionToDialog(modeActionDialogs[i],dialogTitles[i],dialogPrepFuncs[i]));
 }
 
 /*************************************************************************

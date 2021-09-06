@@ -169,8 +169,8 @@
       </div> 
       <div id="roundsModeDialog" 
             class="mode-page action-dialog hidden" role="dialog" 
-        aria-modal="true" aria-labelledby="logRoundHeader" tabindex="0">
-        <h1 id="logRoundHeader" class="mode-page-header">Log Round</h1>
+        aria-modal="true" aria-labelledby="roundFormHeader" tabindex="0">
+        <h1 id="roundFormHeader" class="mode-page-header">Log Round</h1>
         <p id="roundErrorBox" class="alert alert-danger centered hidden">
           <a id="roundDateError" href="#roundDate" class="alert-link">Please enter a valid date<br/></a>
           <a id="roundCourseError" href="#roundCourse" class="alert-link">Please enter a course name having at most 50 characters<br/></a>
@@ -257,9 +257,10 @@
             </div>
           </div>
           <div class="mode-page-btn-container">
-            <button id="roundsModeLogBtn" 
+            <button id="roundFormSubmitBtn" 
               class="mode-page-btn action-dialog action-button" 
-              type="submit"><span class="fa fa-save"></span>&nbsp;Log Round</button>
+              type="submit"><span id="roundFormSubmitBtnIcon" class="fa fa-save"></span>
+              <span id="roundFormSubmitBtnLabel">&nbsp;Log Round</span></button>
             <button id="roundsModeLogCancelBtn" 
               class="mode-page-btn-cancel action-dialog cancel-button"
               type="button"><span class="fa fa-window-close"></span>&nbsp;Cancel</button>
