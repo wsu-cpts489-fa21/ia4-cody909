@@ -165,35 +165,61 @@ roundUpdatedClose.addEventListener("click",function() {
 });
 
 /*************************************************************************
+* @function writeRoundToTable
+* @desc 
+* Given an HTML row elemnt and the index of the round to write, write
+* the round to the row element by replacing its innerHTML.
+* @param row -- a reference to an HTML table row
+* @param rIndex -- an integer index into userData.rounds indicating the
+*        round to write to the table.
+* @global roundLogged: The "Round Logged" toast
+*************************************************************************/
+function writeRoundToTable(row, rIndex) {
+  row.innerHTML = "<td>" + userData.rounds[rIndex].date + "</td><td>" +
+  userData.rounds[rIndex].course + "</td><td>" + 
+  userData.rounds[rIndex].SGS + " (" + userData.rounds[rIndex].strokes +
+  " in " + userData.rounds[rIndex].minutes + ":" + 
+  userData.rounds[rIndex].seconds + 
+  ")</td>" +
+  "<td><button aria-label='View and Edit Round'" + 
+  "onclick='editRound(" + userData.rounds[rIndex].roundNum + ")'><span class='fas fa-eye'>" +
+  "</span>&nbsp;<span class='fas fa-edit'></span></button></td>" +
+  "<td><button aria-label='Delete Round'" + 
+  "onclick='confirmDelete(" + userData.rounds[rIndex].roundNum + ")'>" +
+  "<span class='fas fa-trash'></span></button></td>";
+}
+
+/*************************************************************************
 * @function addRoundToTable 
 * @desc 
-* Adds a newly logged round, which assumed to be the last array entry in
-* userData.rounds, to the "Rounds" table.
+* Adds a newly logged round to the "Rounds" table.
+* After adding a row to the table, calls writeRoundToTable to write data.
+* @param rIndex: index in userData.rounds of round to add
 * @global userData: the current user's data object
 *************************************************************************/
-function addRoundToTable(roundIndex) {
-  const myRounds = userData.rounds;
-  const roundId = userData.rounds[roundIndex].roundNum;
+function addRoundToTable(rIndex) {
   if (roundsTable.rows[1].innerHTML.includes ("colspan")) {
     //empty table! Remove this row before adding new one
     roundsTable.deleteRow(1);
   }
   //Write new row containing new round to table body
   const thisRoundBody = roundsTable.querySelector("tbody");
-  thisRound = thisRoundBody.insertRow(0); //insert as first table row
-  thisRound.id = "r-" + roundId; //set unique id of this row so we can access it later
-  thisRound.innerHTML = "<td>" + userData.rounds[roundIndex].date + "</td><td>" +
-    userData.rounds[roundIndex].course + "</td><td>" + 
-    userData.rounds[roundIndex].SGS + " (" + userData.rounds[roundIndex].strokes +
-    " in " + userData.rounds[roundIndex].minutes + ":" + 
-    userData.rounds[roundIndex].seconds + 
-    ")</td>" +
-    "<td><button aria-label='View and Edit Round'" + 
-    "onclick='editRound(" + roundId + ")'><span class='fas fa-eye'>" +
-    "</span>&nbsp;<span class='fas fa-edit'></span></button></td>" +
-    "<td><button aria-label='Delete Round'" + 
-    "onclick='confirmDelete(" + roundId + ")'>" +
-    "<span class='fas fa-trash'></span></button></td>";
+  const roundRow = thisRoundBody.insertRow(0); //insert as first table row
+  roundRow.id = "r-" + userData.rounds[rIndex].roundNum; //set unique id of this row so we can access it later
+  writeRoundToTable(roundRow,rIndex);
+ }
+
+ /*************************************************************************
+* @function updateRoundInTable 
+* @desc 
+* Updates an existing round in the "Rounds" table with edits made by user.
+* After locating the row, calls writeRoundToTable to write data.
+* @param rIndex: index in userData.rounds of round to update
+* @global userData: the current user's data object
+*************************************************************************/
+ function updateRoundInTable(rIndex) {
+   const roundRow = document.getElementById("r-" + userData.rounds[rIndex].roundNum);
+   writeRoundToTable(roundRow,rIndex);
  }
 
 /*************************************************************************
@@ -283,6 +309,30 @@ function logRound() {
   transitionFromDialog(roundsModeDialog);
 }
 
+function updateRound() {
+  //Update existing round, which is located at userData.rounds[roundIndex]
+  userData.rounds[roundIndex].date = roundDate.value;
+  userData.rounds[roundIndex].course = roundCourse.value;
+  userData.rounds[roundIndex].type = roundType.value;
+  userData.rounds[roundIndex].holes = roundHoles.value;
+  userData.rounds[roundIndex].strokes = roundStrokes.value;
+  userData.rounds[roundIndex].minutes = roundMinutes.value;
+  userData.rounds[roundIndex].seconds = roundSeconds.value;
+  userData.rounds[roundIndex].SGS = roundSGS.value;
+  userData.rounds[roundIndex].notes = roundNotes.value;
+  //Write to local storage
+  localStorage.setItem(userData.accountInfo.email,
+    JSON.stringify(userData));
+  //Reset form to prepare for next visit
+  resetLogRoundForm();
+  //Add new round to table
+  updateRoundInTable(roundIndex);
+  //Transition back to mode page
+  roundUpdatedMsg.textContent = "Round Updated!";
+  roundUpdated.classList.remove("hidden");
+  transitionFromDialog(roundsModeDialog);
+}
+
 /*************************************************************************
 * @function logRoundForm SUBMIT Handler 
 * @Desc 
@@ -332,8 +382,12 @@ logRoundForm.addEventListener("submit",function(e) {
   let notesValid = !roundNotes.validity.tooLong;
   if (courseValid && strokesValid && minutesValid &&
       secondsValid && notesValid &&dateValid) { 
-      //All is well -- log round
-      logRound();
+      //All is well -- log round or update round
+      if (roundFormSubmitBtnIcon.classList.contains("fa-save")) {
+        logRound();
+      } else {
+        updateRound();
+      }
      return;
   }
   //If here, at least one field is invalid: Display the errors
