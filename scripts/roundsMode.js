@@ -261,6 +261,18 @@ function editRound(roundId) {
 }
 
 /*************************************************************************
+* @function deleteRound 
+* @desc 
+* Set to click handler of "Delete" button associated with each row of
+* "Rounds" table. Removes the round from the datable and deletes the round data.
+* @param roundId the unique id of the round that was clicked by the user
+* @global userData: object containing the current user's data
+*************************************************************************/
+function deleteRound(roundID) {
+  // TODO
+} 
+
+/*************************************************************************
 * @function logRound 
 * @desc 
 * Build a JavaScript object containing a new round data, save the
