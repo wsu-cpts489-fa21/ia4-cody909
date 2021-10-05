@@ -185,7 +185,7 @@ function writeRoundToTable(row, rIndex) {
   "onclick='editRound(" + userData.rounds[rIndex].roundNum + ")'><span class='fas fa-eye'>" +
   "</span>&nbsp;<span class='fas fa-edit'></span></button></td>" +
   "<td><button aria-label='Delete Round'" + 
-  "onclick='confirmDelete(" + userData.rounds[rIndex].roundNum + ")'>" +
+  "onclick='deleteRound(" + userData.rounds[rIndex].roundNum + ")'>" +
   "<span class='fas fa-trash'></span></button></td>";
 }
 
@@ -259,6 +259,43 @@ function editRound(roundId) {
   //Display dialog
   transitionToDialog(roundsModeDialog,"SpeedScore: Edit Round",prepEditRoundForm);
 }
+
+/*************************************************************************
+* @function deleteRound 
+* @desc 
+* Set to click handler of "Delete" button associated with each row of
+* "Rounds" table. Removes the round from the datable and deletes the round data.
+* @param roundId the unique id of the round that was clicked by the user
+* @global userData: object containing the current user's data
+*************************************************************************/
+function deleteRound(roundId) {
+    //Find current array index of this round
+    for (roundIndex = 0; roundIndex < userData.rounds.length; ++roundIndex) {
+      if (userData.rounds[roundIndex].roundNum === roundId) {
+        break;
+      }
+    }
+    for (rowIndex = 0; rowIndex <= userData.rounds.length; ++rowIndex) {
+      if (roundsTable.rows[rowIndex].id === ("r-"+roundId)) {
+        break;
+      }
+    }
+
+    console.log("roundIndex = " + roundIndex);
+    console.log("rowIndex = " + rowIndex);
+    roundsTable.deleteRow(rowIndex);
+
+    console.log(userData.rounds);
+    if(roundIndex === 0) {
+      userData.rounds.shift();
+    } else {
+      userData.rounds.splice(roundIndex,roundIndex);
+
+    }
+    --(userData.roundCount);
+    console.log(userData.rounds);
+    localStorage.setItem(userData.accountInfo.email, JSON.stringify(userData))
+} 
 
 /*************************************************************************
 * @function logRound 
