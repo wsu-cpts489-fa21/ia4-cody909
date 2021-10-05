@@ -37,12 +37,18 @@
       alt="SpeedScore logo">
       <h1 id="appName" class="navbar-title">SpeedScore</h1> 
       <div class="navbar-right-items">
+        <input id="searchBox" class="form-control hidden" 
+                aria-label="Search Rounds" size="30"
+                type="search" value="" id="searchRounds"
+                onkeyup="searchRoundsTable(this.value)" 
+                onsearch="searchRoundsTable(this.value)">
         <button  id="searchBtn" type="button" class="navbar-btn hidden" 
-          title="Search" aria-label="Search">
+                aria-label="Open Rounds Search">
           <span class="navbar-btn-icon fas fa-search"></span>
         </button>
-        <button id="profileBtn" type="button" class="navbar-btn navbar-profile-btn hidden" 
-          title="Edit Profile" aria-label="Account Settings">
+        <button id="profileBtn" type="button" 
+          class="navbar-btn navbar-profile-btn hidden" 
+          aria-label="Account and Profile Settings">
         </button> 
       </div>
       <!--THE SIDE MENU -->
@@ -769,5 +775,6 @@
     <script src="scripts/editProfile.js"></script>
     <script src="scripts/roundsMode.js"></script>
     <script src="scripts/modeActions.js"></script>
+    <script src="scripts/searchBtn.js"></script>
    </body>
 </html>

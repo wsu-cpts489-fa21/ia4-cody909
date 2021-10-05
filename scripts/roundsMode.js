@@ -292,6 +292,9 @@ function deleteRound(roundId) {
       userData.rounds.splice(roundIndex,roundIndex);
 
     }
+    if(userData.rounds.length <= 0) {
+      searchBox.classList.add("hidden");
+    }
     --(userData.roundCount);
     console.log(userData.rounds);
     localStorage.setItem(userData.accountInfo.email, JSON.stringify(userData))
