@@ -53,6 +53,7 @@ const dialogTitles = ["SpeedScore: Post to Feed","SpeedScore: Log Round",
 const menuBtn =  document.getElementById("menuBtn"); 
 const sideMenu = document.getElementById("sideMenu");
 const searchBtn = document.getElementById("searchBtn");
+const searchBox = document.getElementById("searchBox");
 const profileBtn = document.getElementById("profileBtn");
 const skipLink = document.getElementById("sLink");
 const modeTabsContainer = document.getElementById("modeTabs");
