@@ -25,7 +25,6 @@ function sortRoundsTable(colNum) {
         count = 0;
     }
     if (unsort === 1 && count >= 2) {
-        console.log("hello")
         const rows = roundsTable.rows.length;
         for (rowIndex = 1; rowIndex < rows - 1; ++rowIndex) {
           roundsTable.deleteRow(1);
@@ -49,7 +48,6 @@ function sortRoundsTable(colNum) {
 
 
       if(sortOrder === "descending") {
-          console.log("hello from if")
           unsort = 1;
       }
     for (let i = 1; i <= 3; ++i) {
