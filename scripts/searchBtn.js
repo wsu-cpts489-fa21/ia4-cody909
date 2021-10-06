@@ -23,10 +23,27 @@ function searchRoundsTable(searchVal) {
     let numVisibleRows = 0;
     for (i = 1; i < tr.length; i++) {  //Loop through all table rows
       td = tr[i].getElementsByTagName("td");
+      roundId = tr[i].id[2]
+      console.log("roundId = " + roundId);
       rowText = "";
-      for (j = 0; j < 3; ++j) { //only consider Date, Course, Score cols
-        rowText += td[j].textContent;
-      }
+
+        for (roundIndex = 0; roundIndex < userData.rounds.length; ++roundIndex) {
+            if (userData.rounds[roundIndex].roundNum == roundId) {
+            break;
+            }
+        }
+
+        rowText += userData.rounds[roundIndex].SGS;
+        rowText += userData.rounds[roundIndex].course;
+        rowText += userData.rounds[roundIndex].date;
+        rowText += userData.rounds[roundIndex].holes;
+        rowText += userData.rounds[roundIndex].minutes;
+        rowText += userData.rounds[roundIndex].notes;
+        rowText += userData.rounds[roundIndex].roundNum;
+        rowText += userData.rounds[roundIndex].seconds;
+        rowText += userData.rounds[roundIndex].strokes;
+        rowText += userData.rounds[roundIndex].type;
+
       if (rowText != "") {
         if (rowText.toUpperCase().indexOf(searchVal) > -1) {
           tr[i].style.display = ""; //show row
@@ -35,11 +52,5 @@ function searchRoundsTable(searchVal) {
           tr[i].style.display = "none"; //hide row
         }
       }
-    }
-    if (numVisibleRows == 1) {
-      roundsTableCaption.textContent = "Table displaying 1 speedgolf round";
-    } else {
-      roundsTableCaption.textContent = "Table displaying " + numVisibleRows + 
-       " speedgolf rounds";
     }
   }
