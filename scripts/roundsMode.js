@@ -206,6 +206,7 @@ function addRoundToTable(rIndex) {
   const thisRoundBody = roundsTable.querySelector("tbody");
   const roundRow = thisRoundBody.insertRow(0); //insert as first table row
   roundRow.id = "r-" + userData.rounds[rIndex].roundNum; //set unique id of this row so we can access it later
+  roundRow.classList.add("row-item"); //Needed for sorting
   writeRoundToTable(roundRow,rIndex);
  }
 
@@ -291,9 +292,6 @@ function deleteRound(roundId) {
     } else {
       userData.rounds.splice(roundIndex,roundIndex);
 
-    }
-    if(userData.rounds.length <= 0) {
-      searchBox.classList.add("hidden");
     }
     --(userData.roundCount);
     console.log(userData.rounds);
