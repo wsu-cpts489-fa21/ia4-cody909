@@ -1,13 +1,21 @@
-# SpeedScore
+# Individual Assignment #4
 
-This repository contains the code for the SpeedScore personal speedfgolf app developed in the book *Full Stack Web Development from the Ground Up* (first edition) by Chris Hundhausen. (c) 2022 Morgan Kaufmann.
+## Author
+Cody Mercadante
 
-The code in each chapter is developed in a feature branch named after the chapter (e.g., 'ch3').
+## Project Board
+[Link to project board](https://github.com/wsu-cpts489-fa21/ia4-cody909/projects/1)
 
-Since the book's development of SpeedScore is *cumulative*, each chapter's feature branch is merged into the main branch, so that the main branch contains the final software product that emerges from the book's development activities.
+## Completed Tasks and Issues
+Here are links to the issues associated with the tasks that I completed in this assignment:
+|Task # | Issue |
+|----------|-----------------------|
+|1 | [Issue #1](https://github.com/wsu-cpts489-fa21/ia4-cody909/issues/1) |
+|2 | [Issue #2](https://github.com/wsu-cpts489-fa21/ia4-cody909/issues/2) |
+|3 | [Issue #3](https://github.com/wsu-cpts489-fa21/ia4-cody909/issues/3) |
+|4 | [Issue #4](https://github.com/wsu-cpts489-fa21/ia5-cody909/issues/4) |
 
-Tagged code snapshots take the project from its initial state through its final state, following the development progression in the chapter's featured code blocks. To follow along with a chapter, you can
- * check out the feature branch associated with the chapter, e.g., `git checkout -b ch3`, which shows you the *final state* of the code at the end of the chatper), or
- * view the code *at a specific point in the chapter* by checking out a tagged version of the code referenced in the chapter, e.g., `git checkout -b ch3s1`. Git tags are used to name each chapter's snapshots sequentially as ch*x*s*y*, where *x* is the chapter number and *y* is the snapshot number. Snapshots start at 0 for each chapter.
+## Reflections
+I really struggled with this assignment. It took me a long time to get the delete functionality to work properly but I was able to get it to work after comparing to how other functionalities work in code. Deleting it from the local storage but deleting the right one from the table was tricky. I also struggled with the sorting but was eventually able to figure out a way to switch between ascending, descending, and unsorted by adding so variables to keep track of the current state. The auto complete was also hard and I was not able to complete it. I tried a few different examples I found online but none of them made the auto complete box appear.
 
-For detailed instructions on how to get the most out of the book's companion code, please see Box 3.1 ("Exploring the Book's Code Using Git, GitHub and VSC") in Chapter 3.
+## Notes
